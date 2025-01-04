@@ -51,7 +51,7 @@ function Timer(props: { setFocus: Function; focusTimer: boolean }) {
   // Change the pomodoroLeft when pomodoroCount is changed
   useEffect(() => {
     if (paused) {
-      console.log("paused")
+      console.log("paused");
       setPomodoriLeft(pomodori);
     }
     console.log("Pomoorod");
@@ -105,7 +105,7 @@ function Timer(props: { setFocus: Function; focusTimer: boolean }) {
     <div className={"timer-component" + " " + (onBreak ? "on-break" : "")}>
       <div className="flex justify-between px-5">
         {/* Set focus */}
-        {props.focusTimer ? (
+        {/* {props.focusTimer ? (
           <>
             <Checkbox />
             <SquareArrowOutDownLeft
@@ -121,7 +121,8 @@ function Timer(props: { setFocus: Function; focusTimer: boolean }) {
               onClick={() => props.setFocus(true)}
             />
           </>
-        )}
+        )} */}
+        
       </div>
       <div className="timer text-center py-2">
         <p className="timer-text-break">{onBreak ? "Break" : "Session"}</p>

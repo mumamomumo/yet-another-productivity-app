@@ -3,6 +3,7 @@ import { loadThemeLocal, saveThemeLocal } from "./ThemeManager";
 import { saveTasks, loadTasks } from "./TaskData";
 import { saveNotesDir, loadNotesDir } from "./NotesData";
 import { saveTimerData, loadTimerData } from "./TimerData";
+import { loadSettingsLocal, saveSettingsLocal } from "./SettingsData";
 
 export function SaveData() {
   savePageData();
@@ -10,6 +11,7 @@ export function SaveData() {
   saveTasks();
   saveNotesDir();
   saveTimerData();
+  saveSettingsLocal();
 }
 
 export function LoadData() {
@@ -18,4 +20,5 @@ export function LoadData() {
   loadTasks();
   loadNotesDir();
   loadTimerData();
+  loadSettingsLocal();
 }

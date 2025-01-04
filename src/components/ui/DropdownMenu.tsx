@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/Popover";
 
-function capitalizeFirstLetter(val) {
+function capitalizeFirstLetter(val: string) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 
-function DropdownMenu(props: { values: Array<string>; setVar?: Function }) {
-  const [value, setValue] = useState(props.values[0]);
+function DropdownMenu(props: {
+  values: Array<string>;
+  setVar?: Function;
+  default?: string;
+  className?: string;
+}) {
+  const [value, setValue] = useState(props.default || props.values[0]);
 
   useEffect(() => {
     if (props.setVar) {
@@ -16,11 +21,14 @@ function DropdownMenu(props: { values: Array<string>; setVar?: Function }) {
 
   return (
     <Popover>
-      <PopoverTrigger className="dropdown-button w-1/3">
+      <PopoverTrigger className={"dropdown-button" + " " + props.className}>
         {capitalizeFirstLetter(value)}
       </PopoverTrigger>
       <PopoverContent className="w-52 p-0 border-none">
-        <div className="dropdown-content grid-cols-1 flex flex-col w-full">
+        <div
+          className="dropdown-content grid-cols-1 flex flex-col w-full"
+          key={props.values.toString()}
+        >
           {props.values.map((data, index, list) => {
             return (
               <>
@@ -36,7 +44,7 @@ function DropdownMenu(props: { values: Array<string>; setVar?: Function }) {
                     " " +
                     (data === value ? "selected" : "")
                   }
-                  key={index}
+                  key={data}
                   onClick={() => setValue(props.values[index])}
                 >
                   {capitalizeFirstLetter(data)}

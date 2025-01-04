@@ -1,4 +1,4 @@
-import { Home, PenLine, Notebook } from "lucide-react";
+import { Home, PenLine, Notebook, Settings, Info } from "lucide-react";
 import { usePageStore, PageName } from "@/store/PageStore";
 
 const { setPage } = usePageStore.getState();
@@ -20,7 +20,11 @@ const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
     tooltip: "notes",
   },
 ];
-function SidebarComponent(props: { className?: string }) {
+function SidebarComponent(props: {
+  className?: string;
+  setOpenSettings: Function;
+  openSettings: boolean;
+}) {
   const page = usePageStore((state) => state.page);
   return (
     <>
@@ -28,7 +32,7 @@ function SidebarComponent(props: { className?: string }) {
         className={
           props.className
             ? props.className
-            : "sidebar w-[50px] fixed h-full pt-[25px] justify-items-center"
+            : "sidebar w-[50px] fixed h-full pt-[25px] justify-items-center "
         }
       >
         {menuItems.map((items) => {
@@ -44,6 +48,20 @@ function SidebarComponent(props: { className?: string }) {
             </div>
           );
         })}
+        <div className=" ">
+          <Info
+            className="sidebar-icon p-1 mx-2"
+            width={ICON_SIZE}
+            height={ICON_SIZE}
+            onClick={() => setPage("info")}
+          />
+          <Settings
+            className="sidebar-icon p-1 m-2"
+            onClick={() => props.setOpenSettings(!props.openSettings)}
+            width={ICON_SIZE}
+            height={ICON_SIZE}
+          />
+        </div>
       </nav>
     </>
   );

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type PageName = "home" | "tasks" | "notes";
+export type PageName = "home" | "tasks" | "notes" | "info";
 type pageStore = {
   page: PageName;
   pageProps: any;

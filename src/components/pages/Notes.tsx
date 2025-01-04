@@ -1,7 +1,6 @@
 import { useState } from "react";
 import NoteEditor from "../Notes/NoteEditorArea";
 import NotesSidebar from "../Notes/NotesSidebar";
-import MarkdownEditor from "../ui/MarkdownEditor";
 import {
   ResizablePanelGroup,
   ResizablePanel,
@@ -29,7 +28,7 @@ function Notes(props: any) {
         {/* Notes Sidebar */}
         <NotesSidebar setOpenNote={setOpenNote} />
       </ResizablePanel>
-      <ResizableHandle className="resize-handle w-2 bg-slate-600" />
+      <ResizableHandle className="resize-handle w-2" />
       <ResizablePanel
         className="right-notes panel flex justify-center"
         defaultSize={67}

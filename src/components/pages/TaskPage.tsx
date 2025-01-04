@@ -25,7 +25,10 @@ function Tasks(props: { addTask: boolean }) {
         }
       >
         <div className="w-full items-center h-full">
-          <TaskList handleAddTask={handleAddTask} className="h-full"/>
+          <TaskList
+            handleAddTask={handleAddTask}
+            className="h-full w-full grid-cols-1 place-items-center"
+          />
         </div>
       </div>
       <div

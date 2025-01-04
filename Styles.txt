@@ -1,25 +1,35 @@
---background
+--caret-color
 --color
+--background
+
 --button-bg
 --button-color
 --button-hover
 
---panel-bg
-
 --titlebar-bg-color
 --titlebar-text-color
 --titlebar-shadow-color
+--titlebar-button-hover
 
 --sidebar-bg-color
 --sidebar-text-color
---sidebar-icon-hover
---sidebar-active-color
---sidebar-active-border
 --sidebar-shadow-color
+--sidebar-icon-hover
+--sidebar-active-border
+--sidebar-active-color
+
+--panel-bg
+
+--timer-button-bg
+--timer-button-hover
 
 --task-list-add-button-bg
 --task-list-add-button-color
 --task-list-add-button-hover
+
+--circle-alert
+--triangle-alert
+--octagon-alert
 
 --task-item-complete-opacity
 
@@ -32,14 +42,17 @@
 --input-border
 --input-active-border
 
---circle-alert
---triangle-alert
---octagon-alert
-
 --dropdown-button-color
 --dropdown-content-bg
 --dropdown-content-color
 --dropdown-content-border
-
 --dropdown-value-bg
 --dropdown-value-color
+--dropdown-selected-bg
+--dropdown-value-hover-bg
+
+--note-side-border
+--note-side-pinned-border
+--note-side-pinned-bg
+
+--settings-bg

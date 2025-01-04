@@ -1,4 +1,3 @@
-import Clock from "../Home/Clock";
 import TaskList from "../Tasks/TaskList";
 import NotesSidebar from "../Notes/NotesSidebar";
 import { useState } from "react";

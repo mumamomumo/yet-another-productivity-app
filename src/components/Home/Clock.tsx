@@ -46,12 +46,14 @@ function Clock(props: { className?: string; hideDate?: boolean }) {
   const seconds = time.getSeconds().toString().padStart(2, "0");
 
   return (
-    <div className={props.className}>
-      <div className="clock text-center max-h-min">
-        <h1 className="time">
-          {hours}:{minutes}:{seconds}
-        </h1>
-        {!props.hideDate && <h1 className="date">{formatDate(time)}</h1>}
+    <div className={props.className} data-tauri-drag-region>
+      <div className="clock text-center max-h-min w-full" data-tauri-drag-region>
+        <div className="flex top-clock gap-4" data-tauri-drag-region>
+          <h1 className="time pt-1">
+            {hours}:{minutes}:{seconds}
+          </h1>
+          {!props.hideDate && <h1 className="date pt-1">{formatDate(time)}</h1>}
+        </div>
       </div>
     </div>
   );

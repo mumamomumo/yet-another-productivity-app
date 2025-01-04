@@ -94,10 +94,12 @@ function AddTaskComponent(props: {
             <DropdownMenu
               values={["low", "medium", "high"]}
               setVar={setPriority}
+              className="w-1/3"
             />
             <DropdownMenu
               values={["todo", "done"]}
               setVar={setStatus}
+              className="w-1/3"
             />
           </div>
         </div>

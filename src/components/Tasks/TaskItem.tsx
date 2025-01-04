@@ -1,7 +1,7 @@
 import { Task } from "@/store/TaskStore";
-import { Checkbox } from "../ui/Checkbox";
 import { useEffect, useState } from "react";
 import { Trash, CircleAlert, TriangleAlert, OctagonAlert } from "lucide-react";
+import CustomCheckbox from "../ui/CustomCheckbox";
 
 export function TaskItem(props: {
   task: Task;
@@ -25,9 +25,9 @@ export function TaskItem(props: {
       }
     >
       <div className="flex rounded-md items-center justify-around text-l gap-3">
-        <Checkbox
+        <CustomCheckbox
           checked={isCompleted}
-          onClick={() => setIsCompleted(!isCompleted)}
+          onCheckChanged={(value) => setIsCompleted(value)}
         />
         <div className="w-2/3 justify-items-start task-item-title">
           <p

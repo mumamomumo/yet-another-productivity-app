@@ -5,17 +5,17 @@ import {
   open,
   readTextFile,
 } from "@tauri-apps/plugin-fs";
-import { join } from "@tauri-apps/api/path";
+import { join, appLocalDataDir } from "@tauri-apps/api/path";
 import { useThemeStore } from "../store/ThemeStore";
 
 const { toggleTheme } = useThemeStore.getState();
 const inDev = process.env.NODE_ENV === "development";
-const themeFolder = inDev
+export const themeFolder = inDev
   ? "Coding/JavaScriptAndStuff/design-e-portfolio/src/themes"
   : "themes";
 const baseDir = inDev ? BaseDirectory.Document : BaseDirectory.AppLocalData;
-
-
+export const localAppDataDir = appLocalDataDir();
+//#region
 const lightThemeStyle = `
 :root {
   --titlebar-bg-color: #f0f0f0;
@@ -51,6 +51,7 @@ const blueThemeStyle = `
   --titlebar-shadow-color: #333333;
 }
 `;
+//#endregion
 
 async function createThemeFolder() {
   console.log("Creating themes folder");
@@ -177,14 +178,17 @@ export async function loadTheme(themeName: string) {
       return;
     }
     loadTheme(themeName);
-    console.log("Loaded Theme", themeName)
+    console.log("Loaded Theme", themeName);
   }
 }
 
 export async function saveThemeLocal() {
   try {
     localStorage.setItem("theme", useThemeStore.getState().theme);
-    localStorage.setItem("registered-themes", useThemeStore.getState().themes.join(","));
+    localStorage.setItem(
+      "registered-themes",
+      useThemeStore.getState().themes.join(",")
+    );
   } catch (e) {
     console.error("failed to save: ", e);
   }
