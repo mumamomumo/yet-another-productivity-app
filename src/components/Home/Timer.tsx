@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Play, Pause, RotateCcw, Pencil } from "lucide-react";
 import EditTimerButton from "../ui/EditTimerButton";
-import { SquareArrowOutUpRight, SquareArrowOutDownLeft } from "lucide-react";
-import { Checkbox } from "../ui/Checkbox";
 import { useTimerStore } from "@/store/TimerStore";
 
 function formatTime(time: number) {
@@ -17,7 +15,7 @@ const breakTimeId = "breakTime";
 const workTimeId = "workTime";
 const pomodoroCountId = "pomodoroCount";
 
-function Timer(props: { setFocus: Function; focusTimer: boolean }) {
+function Timer() {
   const {
     paused,
     setPaused,
@@ -51,10 +49,8 @@ function Timer(props: { setFocus: Function; focusTimer: boolean }) {
   // Change the pomodoroLeft when pomodoroCount is changed
   useEffect(() => {
     if (paused) {
-      console.log("paused");
       setPomodoriLeft(pomodori);
     }
-    console.log("Pomoorod");
   }, [pomodori]);
 
   //Function to handle the pomodoro timer
@@ -87,7 +83,6 @@ function Timer(props: { setFocus: Function; focusTimer: boolean }) {
       setPomodoriLeft(pomodori);
       interval = setInterval(handlePomodoroTimer, 1000);
     } else {
-      console.log("clear");
       clearInterval(interval);
     }
     return () => clearInterval(interval);

@@ -1,8 +1,71 @@
-
 :root {
   --background: #627b8e;
   --color: white;
   --titlebar-bg-color: #36424a;
   --titlebar-text-color: white;
   --titlebar-shadow-color: #333333;
+
+  --button-bg: white;
+  --button-color: white;
+  --button-hover: #4f5b62;
+  --button-active: #2f3335;
+
 }
+
+/* --caret-color
+
+--button-bg
+--button-color
+--button-hover
+
+--titlebar-bg-color
+--titlebar-text-color
+--titlebar-shadow-color
+--titlebar-button-hover
+
+--sidebar-bg-color
+--sidebar-text-color
+--sidebar-shadow-color
+--sidebar-icon-hover
+--sidebar-active-border
+--sidebar-active-color
+
+--panel-bg
+
+--timer-button-bg
+--timer-button-hover
+
+--task-list-add-button-bg
+--task-list-add-button-color
+--task-list-add-button-hover
+
+--circle-alert
+--triangle-alert
+--octagon-alert
+
+--task-item-complete-opacity
+
+--right-task-close-bg
+--right-task-close-color
+--right-task-close-hover
+
+--input-bg
+--input-text
+--input-border
+--input-active-border
+
+--dropdown-button-color
+--dropdown-content-bg
+--dropdown-content-color
+--dropdown-content-border
+--dropdown-value-bg
+--dropdown-value-color
+--dropdown-selected-bg
+--dropdown-value-hover-bg
+
+--note-side-border
+--note-side-pinned-border
+--note-side-pinned-bg
+
+--settings-bg
+ */

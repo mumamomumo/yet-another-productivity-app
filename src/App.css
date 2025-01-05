@@ -37,6 +37,7 @@ body {
 button {
   background: var(--button-bg);
   color: var(--button-color, var(--color));
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
@@ -78,7 +79,7 @@ input::-webkit-inner-spin-button {
       --titlebar-shadow-color,
       var(--sidebar-shadow-color, var(--panel-bg, white))
     );
-  z-index: 1000;
+  z-index: 100;
   grid-area: titlebar;
 }
 .titlebar-button {
@@ -98,27 +99,34 @@ input::-webkit-inner-spin-button {
   background: red;
 }
 
-.titlebar-clock {
-  cursor: default;
-  padding: 5px 7px;
-  transition: background 0.2s ease-in-out;
-  position: absolute;
-  width: 100vw;
-  left: 1.25rem;
-  top: 20px;
-  z-index: 10;
-  text-align: center;
-}
-
 .top-clock {
   background: var(--top-clock-bg, var(--titlebar-bg-color, var(--background)));
-  color: var(--top-clock-color, var(--color));
+  color: var(--top-clock-color, var(--titlebar-text-color, var(--color)));
   box-shadow: 0px 1px 4px
-    var(--top-clock-shadow, var(--titlebar-shadow-color, var(--panel-bg, white)));
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
   padding: 5px 7px;
+  z-index: 1000;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  }
+  -webkit-box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+  -moz-box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+  box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+}
 
 .sidebar {
   background: var(
@@ -131,10 +139,13 @@ input::-webkit-inner-spin-button {
 }
 
 .sidebar-icon {
+  box-sizing: border-box;
   border-radius: 5px;
   transition: all 200ms ease-in-out;
-  border: 2px solid
-    var(--sidebar-shadow-color, var(--sidebar-text-color, var(--background)));
+  border: 4px solid
+    var(
+      var(--sidebar-shadow-color, var(--sidebar-text-color, var(--background)))
+    );
 }
 
 .sidebar-icon:hover {
@@ -196,18 +207,12 @@ input::-webkit-inner-spin-button {
   transition: all 200ms ease-in-out;
   border-radius: 5px;
   padding: 5px 10px;
-  background: var(--task-list-add-button-bg, var(--button-bg, var(--panel-bg)));
-  color: var(
-    --task-list-add-button-color,
-    var(--button-color, var(--background))
-  );
+  background: var(--button-bg);
+  color: var(--button-color);
 }
 
 .task-list-add-button:hover {
-  background: var(
-    --task-list-add-button-hover,
-    var(--button-hover, var(--sidebar-icon-hover))
-  );
+  background: var(--button-hover, var(--sidebar-icon-hover));
 }
 
 .task-item-title,
@@ -242,6 +247,13 @@ input::-webkit-inner-spin-button {
 
 .task-item.complete {
   opacity: var(--task-item-complete-opacity, 0.5);
+}
+
+.task-item-actions > button {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  background: var(--task-action-bg, var(--button-bg));
+  color: var(--task-action-color, var(--button-color));
 }
 
 .right-task-close {
@@ -298,7 +310,8 @@ textarea:focus {
 
 .dropdown-button {
   border: 2px solid
-    var(--dropdown-button-color, var(--input-border, var(--color)));
+    var(--dropdown-button-border, var(--input-border, var(--color)));
+  background: var(--dropdown-button-bg, var(--button-bg, var(--background)));
   border-radius: 10px;
   font-size: large;
   max-width: 150px;
@@ -337,6 +350,21 @@ textarea:focus {
     --dropdown-value-hover-bg,
     var(--button-hover, var(--input-bg))
   );
+}
+
+.checkbox {
+  background: var(--checkbox-bg, var(--button-bg, var(--background)));
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  background: var(--checkbox-hover, var(--button-hover, var(--background)));
+}
+
+.checkbox.checked {
+  background: var(--checkbox-checked-bg, var(--button-bg, var(--button-bg)));
+  color: var(--checkbox-checked-color, var(--button-color, var(--background)));
 }
 
 .left-notes.panel {

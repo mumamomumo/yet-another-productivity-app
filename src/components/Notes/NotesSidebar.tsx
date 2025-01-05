@@ -6,9 +6,7 @@ import {
   readNoteFile,
   deleteNoteFile,
   saveNotesDir,
-  renameNote,
   createNote,
-  saveNote,
 } from "@/data/NotesData";
 import { Note, useNoteStore } from "@/store/NotesStore";
 import NoteSidebarItem from "./NoteSidebarItem";
@@ -76,8 +74,9 @@ function NotesSidebar(props: {
           className="cursor-pointer"
         />
         <h1 className="text-3xl">Notes</h1>
+
         <FilePlus
-          onClick={handleCreateNote}
+          onClick={notesDir !== null ? handleCreateNote : handleOpenNotesFolder}
           width={30}
           height={30}
           className="cursor-pointer"

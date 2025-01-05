@@ -9,46 +9,106 @@ import { join, appLocalDataDir } from "@tauri-apps/api/path";
 import { useThemeStore } from "../store/ThemeStore";
 
 const { toggleTheme } = useThemeStore.getState();
-const inDev = process.env.NODE_ENV === "development";
-export const themeFolder = inDev
-  ? "Coding/JavaScriptAndStuff/design-e-portfolio/src/themes"
-  : "themes";
-const baseDir = inDev ? BaseDirectory.Document : BaseDirectory.AppLocalData;
+export const themeFolder = "themes";
+const baseDir = BaseDirectory.AppLocalData;
 export const localAppDataDir = appLocalDataDir();
-//#region
+//#region Themes
 const lightThemeStyle = `
 :root {
+  --background: #f0f0f0;
+  --color: #000000;
+
   --titlebar-bg-color: #f0f0f0;
   --titlebar-text-color: #000000;
   --titlebar-border-color: #d0d0d0;
-}
-`;
+
+  --sidebar-bg-color: #f0f0f0;
+  --sidebar-text-color: #000000;
+  --sidebar-border-color: #d0d0d0;
+  --sidebar-icon-hover: #d0d0d0;
+  --sidebar-active-color: #f0f0f0;
+
+  --panel-bg: #00000017;
+
+  --checkbox-bg: #f0f0f0;
+  --checkbox-hover: #d0d0d0;
+  --checkbox-checked-bg: #f0f0f0;
+  --checkbox-checked-color: #000000;
+
+  -dropdown-button-color: #000000;
+  --dropdown-content-bg: #f0f0f0;
+  --dropdown-content-color: #000000;
+  --dropdown-content-border: #d0d0d0;
+  --dropdown-value-bg: #f0f0f0;
+  --dropdown-value-color: #000000;
+  --dropdown-selected-bg: #d0d0d0;
+  --dropdown-value-hover-bg: #d0d0d0;
+}`;
 const darkThemeStyle = `
 :root {
-  --background: linear-gradient(20deg, #1e1e1e, #333333);
+  --background: linear-gradient(20deg, #2f2f2f, #3f3f3f);
   --color: aliceblue;
-  
+
+  --button-hover: #afafaf22;
+
   --titlebar-bg-color: #1e1e1e;
   --titlebar-text-color: #ffffff;
   --titlebar-shadow-color: #3a3a3a;
-  
 
-  --sidebar-bg-color: #1e1e1e;
+  --sidebar-bg-color: linear-gradient(180deg, #2f2f2f22, #1f1f1f);
   --sidebar-text-color: #ffffff;
   --sidebar-icon-hover: rgb(68, 68, 68);
   --sidebar-shadow-color: #3a3a3a;
   --sidebar-active-border: #595959;
   --sidebar-active-color: #434343;
-}
 
+  --panel-bg: #eeeeee11;
+
+  --input-border: #ffffff3b;
+  --input-active-border: #ffffff;
+  --input-bg: #3a3a3a;
+  --input-text: #ffffff;
+
+  --dropdown-content-bg: #606060;
+}
 `;
 const blueThemeStyle = `
 :root {
   --background: #627b8e;
   --color: white;
-  --titlebar-bg-color: #36424a;
+  
+  --titlebar-bg-color: #3e4c55;
   --titlebar-text-color: white;
-  --titlebar-shadow-color: #333333;
+  --titlebar-shadow-color: #a1a1a1;
+
+  --button-bg: #4f5b624c;
+  --button-color: white;
+  --button-hover: #4f5b62;
+  --button-active: #2f3335;
+
+  --sidebar-bg-color: linear-gradient(180deg, #546e7e, #5a7583);
+  --sidebar-text-color: white;
+  --sidebar-shadow-color: #a1a1a1;
+  --sidebar-icon-border: #7a919f;
+  --sidebar-icon-hover: #637c8a;
+  --sidebar-active-border: #3d81a9;
+  --sidebar-active-color: #7797aa;
+
+  --panel-bg: #fff1;
+
+  --task-action-bg: none;
+
+  --input-bg: #58666e;
+  --input-text: white;
+  --input-border: #a1a1a1;
+  --input-active-border: #a1a1a1;
+
+  --dropdown-button-bg: #58666e;
+  --dropdown-content-bg: #58666e;
+  --dropdown-content-color: white;
+  --dropdown-content-border: #a1a1a1;
+  --dropdown-selected-bg: #638396;
+  --dropdown-value-hover-bg: #8198a4;
 }
 `;
 //#endregion
@@ -135,7 +195,7 @@ export async function getThemes() {
         theme.name.replace(".css", "")
       );
       useThemeStore.setState((state) => {
-        return { ...state, themes: themeNames };
+        return { ...state, themes: themeNames, theme: themeNames[0] };
       });
       saveThemeLocal();
     })
@@ -199,19 +259,19 @@ export function loadThemeLocal() {
     var themes = localStorage.getItem("registered-themes");
     var currentTheme = localStorage.getItem("theme");
     var registeredThemes = themes!.split(",");
-    useThemeStore.setState((state) => {
-      return {
-        ...state,
-        themes: registeredThemes,
-        theme: currentTheme!,
-      };
-    });
-    loadTheme(currentTheme!);
+    if (registeredThemes.length > 0 && themes?.includes(currentTheme!)) {
+      useThemeStore.setState((state) => {
+        return {
+          ...state,
+          themes: registeredThemes,
+          theme: currentTheme!,
+        };
+      });
+    } else {
+      throw new Error("No themes found");
+    }
   } catch (e) {
     console.error("Error loading themes: ", e);
+    getThemes();
   }
 }
-type ThemeData = {
-  currentTheme: string;
-  themes: string[];
-};

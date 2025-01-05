@@ -44,7 +44,12 @@ function Settings(props: { setSettingsOpen: Function }) {
         </div>
         <hr />
         <div className="settings-theme p-2 justify-between items-center">
-          <h2 className="col-span-1 col-start-1">Theme</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="col-span-1 col-start-1">Theme</h2>
+            {theme === "light" ? (
+              <p className="text-[8px]"> I've never used light mode. I like to keep my retinas</p>
+            ) : null}
+          </div>
           <div className="theme-controls flex">
             <FolderOpen
               className="w-6 h-6 cursor-pointer theme-icon"

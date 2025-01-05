@@ -27,7 +27,12 @@ function Titlebar() {
         data-tauri-drag-region
         className="titlebar fixed top-0 w-full flex justify-between h-[25px]"
       >
-        <h1 className="titlebar-title px-2 text-sm content-center" data-tauri-drag-region>App name</h1>
+        <h1
+          className="titlebar-title px-2 text-sm content-center"
+          data-tauri-drag-region
+        >
+          Yet another productivity app
+        </h1>
         <div className="titlebar-buttons flex h-[100%]">
           <button className="titlebar-button minimize" onClick={handleMinimize}>
             <Minus height={15} />

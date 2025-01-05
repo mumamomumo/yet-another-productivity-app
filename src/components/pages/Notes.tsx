@@ -8,7 +8,7 @@ import {
 } from "../ui/Resizable";
 import { useNoteStore } from "@/store/NotesStore";
 
-function Notes(props: any) {
+function Notes() {
   const { notes } = useNoteStore();
   const [openNote, setOpenNote] = useState<string | null>(null);
 

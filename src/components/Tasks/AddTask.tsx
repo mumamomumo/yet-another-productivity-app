@@ -1,7 +1,6 @@
 import { Task, useTaskStore } from "@/store/TaskStore";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { Popover } from "../ui/Popover";
 import DropdownMenu from "../ui/DropdownMenu";
 
 function AddTaskComponent(props: {
@@ -50,7 +49,7 @@ function AddTaskComponent(props: {
 
       addTask(newTask);
     }
-
+    
     titleRef.current!.value = "";
     descriptionRef.current!.value = "";
     setPriority("low");
@@ -94,11 +93,13 @@ function AddTaskComponent(props: {
             <DropdownMenu
               values={["low", "medium", "high"]}
               setVar={setPriority}
+              default={priority}
               className="w-1/3"
             />
             <DropdownMenu
               values={["todo", "done"]}
               setVar={setStatus}
+              default={status}
               className="w-1/3"
             />
           </div>

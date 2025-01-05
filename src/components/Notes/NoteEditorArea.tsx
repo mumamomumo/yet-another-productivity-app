@@ -1,16 +1,16 @@
 import { Note, useNoteStore } from "@/store/NotesStore";
 import { useEffect, useRef } from "react";
 import { renameNote, saveNote } from "@/data/NotesData";
-
+import { useSettingsStore } from "@/store/GeneralSettings";
 
 function NoteEditor(props: {
   openNote: Note | undefined;
   setOpenNote: (noteId: string | null) => void;
 }) {
   const { updateNote, notesDir } = useNoteStore();
+  const { topClock } = useSettingsStore().settings;
   const noteTitleRef = useRef<HTMLInputElement>(null);
   const noteContentRef = useRef<HTMLTextAreaElement>(null);
-  console.log(props.openNote);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape") {
@@ -49,7 +49,7 @@ function NoteEditor(props: {
 
     // Component thing
     return (
-        <div className="note-editor-area p-2 h-full overflow-hidden flex flex-col items-center w-full">
+      <div className="note-editor-area p-2 h-full overflow-hidden flex flex-col items-center w-full">
         <input
           ref={noteTitleRef}
           type="text"
@@ -59,14 +59,16 @@ function NoteEditor(props: {
               handleRenameNote(props.openNote!.id, noteTitleRef.current!.value);
             }
           }}
-          className="note-editor-title"
+          className={
+            "note-editor-title max-w-[900px]" + " " + (topClock ? "mt-6" : "")
+          }
         />
-          <textarea
-            placeholder="Write your note here..."
-            ref={noteContentRef}
-            className=" my-3 h-[100%] p-5 max-w-[900px]"
-            onChange={(e) => updateNoteContent(e.target.value)}
-          />
+        <textarea
+          placeholder="Write your note here..."
+          ref={noteContentRef}
+          className=" my-3 h-[100%] p-5 max-w-[900px]"
+          onChange={(e) => updateNoteContent(e.target.value)}
+        />
       </div>
     );
   }

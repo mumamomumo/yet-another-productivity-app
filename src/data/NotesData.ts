@@ -8,16 +8,19 @@ import {
   rename,
   writeTextFile,
 } from "@tauri-apps/plugin-fs";
-import { join } from "@tauri-apps/api/path";
+import { join, documentDir } from "@tauri-apps/api/path";
 import { useNoteStore } from "@/store/NotesStore";
+
+const documentDirectory = documentDir();
 
 export async function getNotes(): Promise<string | null> {
   const notesDir = await open({
     directory: true,
     canCreateDirectories: true,
+    filters: [{ extensions: [".md", ".txt"], name: "Markdown Files" }],
     multiple: false,
     title: "Select notes directory",
-    defaultPath: "",
+    defaultPath: await documentDirectory,
   });
 
   return notesDir;
@@ -64,6 +67,6 @@ export function saveNotesDir() {
 }
 export function loadNotesDir() {
   const noteDir = localStorage.getItem("notesDir");
-  if (noteDir) useNoteStore.getState().updateNoteDir(noteDir);
-  return noteDir;
+  if (noteDir !== "null") useNoteStore.getState().updateNoteDir(noteDir!);
+  return null;
 }

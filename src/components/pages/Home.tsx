@@ -5,7 +5,7 @@ import NoteEditor from "../Notes/NoteEditorArea";
 import { useNoteStore } from "@/store/NotesStore";
 import Timer from "../Home/Timer";
 
-function Home(props: {setFocus: Function, focusTimer: boolean}) {
+function Home() {
   const [openNote, setOpenNote] = useState<string | null>(null);
   const { notes } = useNoteStore();
   return (
@@ -16,7 +16,7 @@ function Home(props: {setFocus: Function, focusTimer: boolean}) {
         {/* Timer */}
         <div className="flex flex-col h-full justify-center p-1">
           <div className="home-timer panel py-5">
-            <Timer setFocus={props.setFocus} focusTimer={props.focusTimer}/>
+            <Timer />
           </div>
           <div />
         </div>

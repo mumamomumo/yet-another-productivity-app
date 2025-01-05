@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TaskList from "../Tasks/TaskList";
 import AddTaskComponent from "../Tasks/AddTask";
 
 import { setPage } from "@/store/PageStore";
-import { Task, useTaskStore } from "@/store/TaskStore";
+import { useTaskStore } from "@/store/TaskStore";
 
 function Tasks(props: { addTask: boolean }) {
-  console.log("Task Page render");
   // const tasks = useTaskStore((state) => state.tasks);
   const editingTask = useTaskStore((state) => state.editingTask);
   const [rightPanelActive, setRightPanelActive] = useState(props.addTask);

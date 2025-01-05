@@ -1,58 +1,60 @@
 --caret-color
---color
 --background
+--color
 
 --button-bg
 --button-color
 --button-hover
 
---titlebar-bg-color
---titlebar-text-color
---titlebar-shadow-color
---titlebar-button-hover
+--checkbox-bg
+--checkbox-hover
+--checkbox-checked-bg
+--checkbox-checked-color
 
---sidebar-bg-color
---sidebar-text-color
---sidebar-shadow-color
---sidebar-icon-hover
+--titlebar-bg-color
+--titlebar-button-hover
+--titlebar-shadow-color
+--titlebar-text-color
+
 --sidebar-active-border
 --sidebar-active-color
-
---panel-bg
-
---timer-button-bg
---timer-button-hover
-
---task-list-add-button-bg
---task-list-add-button-color
---task-list-add-button-hover
+--sidebar-bg-color
+--sidebar-icon-hover
+--sidebar-shadow-color
+--sidebar-text-color
 
 --circle-alert
---triangle-alert
 --octagon-alert
 
---task-item-complete-opacity
+--input-active-border
+--input-bg
+--input-border
+--input-text
+
+--dropdown-button-bg
+--dropdown-button-border
+--dropdown-content-bg
+--dropdown-content-border
+--dropdown-content-color
+--dropdown-selected-bg
+--dropdown-value-hover-bg
+
+--note-side-border
+--note-side-pinned-bg
+--note-side-pinned-border
+
+--panel-bg
 
 --right-task-close-bg
 --right-task-close-color
 --right-task-close-hover
 
---input-bg
---input-text
---input-border
---input-active-border
+--task-action-bg
+--task-action-color
+--task-item-complete-opacity
 
---dropdown-button-color
---dropdown-content-bg
---dropdown-content-color
---dropdown-content-border
---dropdown-value-bg
---dropdown-value-color
---dropdown-selected-bg
---dropdown-value-hover-bg
+--top-clock-bg
+--top-clock-color
+--top-clock-shadow
 
---note-side-border
---note-side-pinned-border
---note-side-pinned-bg
-
---settings-bg
+--triangle-alert

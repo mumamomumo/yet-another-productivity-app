@@ -11,16 +11,16 @@ function DropdownMenu(props: {
   default?: string;
   className?: string;
 }) {
-  const [value, setValue] = useState(props.default || props.values[0]);
+  const [value, setValue] = useState(props.default ? props.default : props.values[0]);
 
   useEffect(() => {
     if (props.setVar) {
       props.setVar(value);
     }
-  }, [value]);
+  }, [value, props.default]);
 
   return (
-    <Popover>
+    <Popover key={props.values.toString()}>
       <PopoverTrigger className={"dropdown-button" + " " + props.className}>
         {capitalizeFirstLetter(value)}
       </PopoverTrigger>

@@ -11,7 +11,7 @@ type ThemeStore = {
 export const useThemeStore = create<ThemeStore>((set) => ({
   theme: themes[0],
   toggleTheme: (theme) => {
-    set({ theme });
+    set({ theme: theme });
   },
   themes: themes,
   addTheme: (theme) => {

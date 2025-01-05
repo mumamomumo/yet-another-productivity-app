@@ -19,7 +19,8 @@ function CustomCheckbox(props: {
         onClick={() => setIsChecked(!isChecked)}
         className={
           "checkbox relative flex items-center justify-center border-2 rounded-md p-[1px] " +
-          (props.size ? `w-${props.size} h-${props.size}` : "w-5 h-5")
+          (props.size ? `w-${props.size} h-${props.size}` : "w-5 h-5") + " " + (
+            isChecked ? "checked" : "")
         }
       >
         {isChecked && <Check />}
