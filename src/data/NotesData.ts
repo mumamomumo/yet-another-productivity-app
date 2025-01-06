@@ -1,72 +1,59 @@
-import { open } from "@tauri-apps/plugin-dialog";
 import {
   create,
   DirEntry,
+  mkdir,
   readDir,
   readTextFile,
   remove,
   rename,
   writeTextFile,
 } from "@tauri-apps/plugin-fs";
-import { join, documentDir } from "@tauri-apps/api/path";
-import { useNoteStore } from "@/store/NotesStore";
+import { join, appLocalDataDir } from "@tauri-apps/api/path";
 
-const documentDirectory = documentDir();
+const localAppData = appLocalDataDir();
+const notesFolder = "notes";
 
-export async function getNotes(): Promise<string | null> {
-  const notesDir = await open({
-    directory: true,
-    canCreateDirectories: true,
-    filters: [{ extensions: [".md", ".txt"], name: "Markdown Files" }],
-    multiple: false,
-    title: "Select notes directory",
-    defaultPath: await documentDirectory,
-  });
-
-  return notesDir;
-}
-export async function readNotesDir(
-  dir: string | null
-): Promise<DirEntry[] | null> {
-  if (dir) {
-    const notesDirFiles = await readDir(dir);
+export async function readNotesDir(): Promise<DirEntry[] | null> {
+  try {
+    const notesDirFiles = await readDir(
+      await join(await localAppData, notesFolder)
+    );
     const notes = notesDirFiles.filter(
       (value) => value.name.endsWith(".md") && value.isFile
     );
     return notes;
-  } else {
-    return null;
+  } catch (e) {
+    mkdir(await join(await localAppData, notesFolder));
+    return readNotesDir();
   }
 }
-export async function readNoteFile(note: DirEntry, path: string) {
-  const noteData = await readTextFile(await join(path, note.name));
+export async function readNoteFile(note: string) {
+  const noteData = await readTextFile(
+    await join(await localAppData, notesFolder, note)
+  );
   return noteData;
 }
 export async function createNote(title: string) {
-  create(await join(useNoteStore.getState().notesDir!, `${title}.md`));
+  try {
+    create(await join(await localAppData, notesFolder, `${title}.md`));
+  } catch (e) {
+    console.error(e);
+  }
 }
-export async function deleteNoteFile(note: string, path: string) {
+export async function deleteNoteFile(note: string) {
   const noteFile = note + ".md";
-  remove(await join(path, noteFile));
+  remove(await join(await localAppData, notesFolder, noteFile));
 }
-export async function renameNote(note: string, path: string, newName: string) {
+export async function renameNote(note: string, newName: string) {
   await rename(
-    await join(path, `${note}.md`),
-    await join(path, `${newName}.md`)
+    await join(await localAppData, notesFolder, `${note}.md`),
+    await join(await localAppData, notesFolder, `${newName}.md`)
   );
 }
-export async function saveNote(title: string, path: string, content: string) {
+export async function saveNote(title: string, content: string) {
   const noteFile = title + ".md";
-  const notePath = await join(path, noteFile);
+  const notePath = await join(await localAppData, notesFolder, noteFile);
   const noteContent = `${content}`;
 
   writeTextFile(notePath, noteContent);
-}
-export function saveNotesDir() {
-  localStorage.setItem("notesDir", useNoteStore.getState().notesDir!);
-}
-export function loadNotesDir() {
-  const noteDir = localStorage.getItem("notesDir");
-  if (noteDir !== "null") useNoteStore.getState().updateNoteDir(noteDir!);
-  return null;
 }

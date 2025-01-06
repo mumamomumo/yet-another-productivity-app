@@ -7,7 +7,7 @@ function NoteEditor(props: {
   openNote: Note | undefined;
   setOpenNote: (noteId: string | null) => void;
 }) {
-  const { updateNote, notesDir } = useNoteStore();
+  const { updateNote } = useNoteStore();
   const { topClock } = useSettingsStore().settings;
   const noteTitleRef = useRef<HTMLInputElement>(null);
   const noteContentRef = useRef<HTMLTextAreaElement>(null);
@@ -17,7 +17,7 @@ function NoteEditor(props: {
       props.setOpenNote(null);
     }
     if (e.key === "s" && e.ctrlKey) {
-      saveNote(props.openNote!.title, notesDir!, noteContentRef.current!.value);
+      saveNote(props.openNote!.title, noteContentRef.current!.value);
       updateNote(props.openNote!.id, { unsaved: false });
     }
   };
@@ -43,7 +43,7 @@ function NoteEditor(props: {
     };
     // Update note title
     const handleRenameNote = (id: string, title: string) => {
-      renameNote(props.openNote!.title, notesDir!, title);
+      renameNote(props.openNote!.title, title);
       updateNote(id, { title: title });
     };
 
@@ -62,6 +62,7 @@ function NoteEditor(props: {
           className={
             "note-editor-title max-w-[900px]" + " " + (topClock ? "mt-6" : "")
           }
+          onBlur={(e) => handleRenameNote(props.openNote!.id, e.target.value)}
         />
         <textarea
           placeholder="Write your note here..."

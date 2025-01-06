@@ -25,15 +25,16 @@
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
     "fs:allow-create",
+    "global-shortcut:allow-is-registered",
+    "global-shortcut:allow-register",
+    "global-shortcut:allow-unregister",
+    "global-shortcut:allow-unregister-all",
     "dialog:allow-open",
+    "dialog:allow-ask",
     {
       "identifier": "fs:scope",
       "allow": [
-        { "path": "$APPLOCALDATA/**/**/*" },
-        { "path": "$DOCUMENT/**/**/**" },
-        {
-          "path": "$APPDATA/**/*"
-        }
+        { "path": "$APPLOCALDATA/**/**/*" }
       ]
     }
   ]

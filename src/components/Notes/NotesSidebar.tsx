@@ -1,11 +1,9 @@
 import { FilePlus, FolderOpen } from "lucide-react";
 
 import {
-  getNotes,
   readNotesDir,
   readNoteFile,
   deleteNoteFile,
-  saveNotesDir,
   createNote,
 } from "@/data/NotesData";
 import { Note, useNoteStore } from "@/store/NotesStore";
@@ -19,25 +17,17 @@ function NotesSidebar(props: {
   className?: string;
   setOpenNote: (noteId: string | null) => void;
 }) {
-  const { notes, notesDir, updateNoteDir, addNote, deleteNote, pinNote } =
-    useNoteStore();
+  const { notes, addNote, deleteNote, pinNote } = useNoteStore();
   // Reads notes on launch
   useEffect(() => {
-    if (notesDir) {
-      readNotesDir(notesDir);
-      readNotes();
-    }
+    readNotesDir();
+    readNotes();
   }, []);
 
-  // Save notes dir
-  useEffect(() => {
-    saveNotesDir();
-  }, [notesDir]);
-
   async function readNotes() {
-    const savedNotes = await readNotesDir(notesDir);
+    const savedNotes = await readNotesDir();
     savedNotes?.map(async (value) => {
-      const noteData = await readNoteFile(value, notesDir!);
+      const noteData = await readNoteFile(value.name);
       const noteTitle = value.name.replace(".md", "");
       addNote({
         id: uuidv4(),
@@ -46,16 +36,8 @@ function NotesSidebar(props: {
       });
     });
   }
-  const handleOpenNotesFolder = async () => {
-    const notesDir = await getNotes();
-    console.log(notesDir);
-    if (notesDir) {
-      updateNoteDir(notesDir);
-      await readNotes();
-    }
-  };
   const handleDeleteNote = (note: Note) => {
-    deleteNoteFile(note.title, notesDir!);
+    deleteNoteFile(note.title);
     deleteNote(note.id);
   };
   const handleCreateNote = async () => {
@@ -67,16 +49,11 @@ function NotesSidebar(props: {
   return (
     <div className="grid grid-rows-[50px_1fr] h-full gap-5">
       <div className="flex items-center justify-between min-h-[50px] panel px-3">
-        <FolderOpen
-          onClick={handleOpenNotesFolder}
-          width={30}
-          height={30}
-          className="cursor-pointer"
-        />
+        <FolderOpen width={30} height={30} className="cursor-pointer" />
         <h1 className="text-3xl">Notes</h1>
 
         <FilePlus
-          onClick={notesDir !== null ? handleCreateNote : handleOpenNotesFolder}
+          onClick={handleCreateNote}
           width={30}
           height={30}
           className="cursor-pointer"

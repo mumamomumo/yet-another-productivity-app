@@ -10,8 +10,6 @@ export type Note = {
 
 type NoteStore = {
   notes: Note[];
-  notesDir: string | null;
-  updateNoteDir: (dir: string) => void;
   addNote: (note: Note) => void;
   updateNote: (id: string, note: Partial<Note>) => void;
   deleteNote: (id: string) => void;
@@ -29,11 +27,6 @@ function sortNotes(a: Note, b: Note) {
 export const useNoteStore = create<NoteStore>((set) => {
   return {
     notes: [],
-    notesDir: null,
-    updateNoteDir: (dir: string) =>
-      set((state) => {
-        return { ...state, notesDir: dir };
-      }),
     addNote: (note: Note) => {
       set((state) => {
         if (state.notes.find((value) => value.title === note.title))

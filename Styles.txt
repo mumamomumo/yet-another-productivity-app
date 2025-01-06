@@ -24,6 +24,7 @@
 --sidebar-text-color
 
 --circle-alert
+--triangle-alert
 --octagon-alert
 
 --input-active-border
@@ -45,6 +46,8 @@
 
 --panel-bg
 
+--settings-bg
+
 --right-task-close-bg
 --right-task-close-color
 --right-task-close-hover
@@ -57,4 +60,23 @@
 --top-clock-color
 --top-clock-shadow
 
---triangle-alert
+--show-chat-button-bg
+--show-chat-button-color
+--show-chat-button-border
+--show-chat-button-hover
+
+--ai-chat-bg
+--ai-chat-color
+--ai-chat-border
+
+--chat-message-bg
+--chat-message-color
+--chat-message-border
+
+--chat-user-bg
+--chat-user-color
+--chat-user-border
+
+--chat-bot-bg
+--chat-bot-color
+--chat-bot-border

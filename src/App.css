@@ -34,13 +34,15 @@ body {
   overflow: hidden;
 }
 
-button {
+button,
+.button {
   background: var(--button-bg);
   color: var(--button-color, var(--color));
   transition: all 0.2s ease-in-out;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   background: var(--button-hover);
 }
 
@@ -406,4 +408,83 @@ textarea:focus {
   justify-content: end;
   align-items: center;
   gap: 10px;
+}
+
+.show-chat-button {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+  background: var(
+    --show-chat-button-bg,
+    var(--button-bg, var(--sidebar-icon-hover, var(--color)))
+  );
+  color: var(--show-chat-button-color, var(--button-color, var(--color)));
+  border: 1px solid
+    var(
+      --show-chat-button-border,
+      var(--button-border, var(--sidebar-shadow-color, var(--background)))
+    );
+}
+
+.show-chat-button:hover {
+  background: var(
+    --show-chat-button-hover,
+    var(--button-hover, var(--sidebar-icon-hover, var(--color)))
+  );
+}
+
+.chat-info {
+  border: 2px solid var(--input-border);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.ai-chat {
+  background: var(--ai-chat-bg, var(--background));
+  color: var(--ai-chat-color, var(--color));
+  border: 1px solid var(--ai-chat-border, var(--color));
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.chat-user {
+  background: var(--chat-user-bg, var(--chat-message-bg, var(--background)));
+  color: var(--chat-user-color, var(--chat-message-color, var(--color)));
+  border: 1px solid
+    var(--chat-user-border, var(--chat-message-border, var(--color)));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.chat-bot {
+  background: var(--chat-bot-bg, var(--chat-message-bg, var(--background)));
+  color: var(--chat-bot-color, var(--chat-message-color, var(--color)));
+  border: 1px solid
+    var(--chat-bot-border, var(--chat-message-border, var(--color)));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.chat-actions-hover {
+  opacity: 0;
+  position: absolute;
+  transition: all 200ms ease-in-out;
+}
+
+.chat-actions:hover .chat-actions-hover {
+  visibility: visible;
+  transform: translateY(-25px);
+  opacity: 1;
+}
+
+.chat-title {
+  border-bottom: 1px solid var(--chat-title-border, var(--color));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+  transition: all 200ms ease-in-out;
+  background: var(--chat-title-bg, var(--background));
+  color: var(--chat-title-color, var(--color));
 }

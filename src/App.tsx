@@ -2,8 +2,9 @@ import "./App.css";
 
 // Data
 import { loadTheme } from "./data/ThemeManager";
-import { usePageStore } from "./store/PageStore";
+import { setPage, usePageStore } from "./store/PageStore";
 import { useThemeStore } from "./store/ThemeStore";
+import { useSettingsStore } from "./store/GeneralSettings";
 import { LoadData } from "./data/DataManager";
 import { savePageData } from "./data/PageData";
 
@@ -14,12 +15,12 @@ import Home from "./components/pages/Home";
 import Notes from "./components/pages/Notes";
 import Tasks from "./components/pages/TaskPage";
 import Info from "./components/pages/Info";
+import Settings from "./components/pages/Settings";
+import Clock from "./components/Home/Clock";
+import { OllamaChatMenu } from "./components/ui/OllamaChatMenu";
 
 // Normal imports
 import { useEffect, useState } from "react";
-import Settings from "./components/pages/Settings";
-import { useSettingsStore } from "./store/GeneralSettings";
-import Clock from "./components/Home/Clock";
 
 LoadData();
 function App() {
@@ -30,17 +31,32 @@ function App() {
   const pageProps = usePageStore((state) => state.pageProps);
   const { settings } = useSettingsStore();
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (e.ctrlKey && e.key === "p") {
-      setSettingsOpen(!settingsOpen);
-    } else if (e.key === "Escape") {
-      setSettingsOpen(false);
-    }
-  }
-
+  // Keybinds
   useEffect(() => {
-    addEventListener("keydown", handleKeyDown);
-    return removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && (e.key === "k" || e.key === "r")) {
+        e.preventDefault();
+      }
+
+      if (e.altKey && e.key === "1") {
+        setPage("home");
+      }
+
+      if (e.altKey && e.key === "2") {
+        setPage("tasks");
+      }
+      if (e.altKey && e.key === "3") {
+        setPage("notes");
+      }
+      if (e.ctrlKey && e.key === "p") {
+        e.preventDefault()
+        setSettingsOpen(true);
+        console.log(settingsOpen);
+      }
+      if (e.key === "Escape") {
+        setSettingsOpen(false);
+      }
+    });
   }, []);
 
   // Load selected theme
@@ -58,13 +74,13 @@ function App() {
   return (
     <div className="app h-screen w-screen">
       <Titlebar />
-
       <SidebarComponent
         setOpenSettings={setSettingsOpen}
         openSettings={settingsOpen}
       />
       {settingsOpen ? <Settings setSettingsOpen={setSettingsOpen} /> : null}
       <main>
+        {settings.enableAI && <OllamaChatMenu />}
         {settings.topClock && !(page === "info") && (
           <div className="text-[15px] flex justify-center">
             <Clock className="fixed top-[3%]" hideDate={!settings.showDate} />

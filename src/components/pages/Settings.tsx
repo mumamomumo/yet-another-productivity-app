@@ -32,7 +32,7 @@ function Settings(props: { setSettingsOpen: Function }) {
 
   return (
     <>
-      <div className="settings-container w-screen h-screen z-40 backdrop-blur-[1px]" />
+      <div className="settings-container w-screen h-screen z-40 backdrop-blur-[1px]"/>
       <div className="settings-modal fixed backdrop-blur-[4px] top-[8vh] left-[10vw] w-[85vw] h-[84vh] border-2 rounded-md z-50">
         <div className="settings-header flex items-center justify-between">
           <X
@@ -47,7 +47,10 @@ function Settings(props: { setSettingsOpen: Function }) {
           <div className="flex items-center justify-between">
             <h2 className="col-span-1 col-start-1">Theme</h2>
             {theme === "light" ? (
-              <p className="text-[8px]"> I've never used light mode. I like to keep my retinas</p>
+              <p className="text-[8px]">
+                {" "}
+                I've never used light mode. I like to keep my retinas
+              </p>
             ) : null}
           </div>
           <div className="theme-controls flex">
@@ -69,7 +72,7 @@ function Settings(props: { setSettingsOpen: Function }) {
         </div>
         <hr />
         <div className="settings-clock flex justify-between items-center p-2">
-          <h2 className="col-span-1 col-start-1">Clock</h2>
+          <h2 className="col-span-1 col-start-1">Enable Clock</h2>
           <div>
             <CustomCheckbox
               checked={settings.topClock!}
@@ -79,7 +82,7 @@ function Settings(props: { setSettingsOpen: Function }) {
         </div>
         {settings.topClock && (
           <div className="settings-clock flex justify-between items-center p-2">
-            <li>Date</li>
+            <li>Show Date</li>
             <div>
               <CustomCheckbox
                 checked={settings.showDate!}
@@ -88,7 +91,16 @@ function Settings(props: { setSettingsOpen: Function }) {
             </div>
           </div>
         )}
-
+        <hr />
+        <div className="settings-clock flex justify-between items-center p-2">
+          <h2 className="col-span-1 col-start-1">Enable AI Chat</h2>
+          <div>
+            <CustomCheckbox
+              checked={settings.topClock!}
+              onCheckChanged={(value) => setSettings({ enableAI: value })}
+            />
+          </div>
+        </div>
         <hr />
         <p className="text-center text-[8px] py-2">More to come... hopefully</p>
       </div>

@@ -1,3 +1,4 @@
+import { Trash } from "lucide-react";
 import { useState } from "react";
 
 function Info(props: { setPage: Function }) {
@@ -81,8 +82,10 @@ function Info(props: { setPage: Function }) {
           {showVariables ? "Hide variables" : "Show variables"}
         </h1>
         <span className="text-sm text-amber-400">
-          Warning, there's quite a lot
+          Warning, there's quite a lot.
         </span>
+        <br />
+        <span className="text-xs py-0 line-clamp-1">But you don't have to style all of them</span>
         {showVariables && (
           <p className="text-md">
             <span className="font-bold">Variables:</span>
@@ -182,7 +185,7 @@ function Info(props: { setPage: Function }) {
               </li>
               <li>
                 <span className="font-bold">--sidebar-active-border</span>:
-                Active tab icon border
+                Active tab icon border color
               </li>
               <li>
                 <span className="font-bold">--sidebar-active-color</span>:
@@ -218,12 +221,12 @@ function Info(props: { setPage: Function }) {
                 on hover
               </li>
               <li>
-                <span className="font-bold">--note-side-border</span>: Border of
-                notes in the list of notes
+                <span className="font-bold">--note-side-border</span>: Border
+                color of notes in the list of notes
               </li>
               <li>
                 <span className="font-bold">--note-side-pinned-border</span>:
-                Border of pinned notes in the list of notes
+                Border color of pinned notes in the list of notes
               </li>
               <li>
                 <span className="font-bold">--note-side-pinned-bg</span>:
@@ -232,6 +235,107 @@ function Info(props: { setPage: Function }) {
               <li>
                 <span className="font-bold">--settings-bg</span>: Background of
                 the settings page
+              </li>
+              <li className="flex items-center">
+                <span className="font-bold">--task-action-bg</span>: Background
+                of the task actions (The <Trash className="w-4 h-4 mx-1" />{" "}
+                icon)
+              </li>
+              <li className="flex items-center">
+                <span className="font-bold">--task-action-bg</span>: Color of
+                the task actions (The <Trash className="w-4 h-4 mx-1" /> icon)
+              </li>
+              <li>
+                <span className="font-bold">--task-item-complete-opacity</span>:
+                Opacity of completed tasks
+              </li>
+              <li>
+                <span className="font-bold">--top-clock-bg</span>: Background of
+                the clock in the top bar
+              </li>
+              <li>
+                <span className="font-bold">--top-clock-color</span>: Color of
+                the clock in the top bar
+              </li>
+              <li>
+                <span className="font-bold">--top-clock-shadow</span>: Shadow
+                color of the clock in the top bar
+              </li>
+              <li>
+                <span className="font-bold">--show-chat-button-bg</span>:
+                Background of the show chat button
+              </li>
+              <li>
+                <span className="font-bold">--show-chat-button-color</span>:
+                Color of the show chat button
+              </li>
+              <li>
+                <span className="font-bold">--show-chat-button-border</span>:
+                Border color of the show chat button
+              </li>
+              <li>
+                <span className="font-bold">--show-chat-button-hover</span>:
+                Background of the show chat button on hover
+              </li>
+              <li>
+                <span className="font-bold">--ai-chat-bg</span>: Background of
+                AI chat messages
+              </li>
+              <li>
+                <span className="font-bold">--ai-chat-color</span>: Color of AI
+                chat messages
+              </li>
+              <li>
+                <span className="font-bold">--ai-chat-border</span>: Border
+                color of AI chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-message-bg</span>: Background
+                of chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-message-color</span>: Color
+                of chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-message-border</span>: Border
+                color of chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-user-bg</span>: Background of
+                your chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-user-color</span>: Color of
+                your chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-user-border</span>: Border
+                color of your chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-bot-bg</span>: Background of
+                the bot's chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-bot-color</span>: Color of
+                the bot's chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-bot-border</span>: Border
+                color of the bot's chat messages
+              </li>
+              <li>
+                <span className="font-bold">--chat-title-bg</span>: Background
+                of the title of the AI chat
+              </li>
+              <li>
+                <span className="font-bold">--chat-bot-color</span>: Color of
+                the title of the AI chat
+              </li>
+              <li>
+                <span className="font-bold">--chat-bot-border</span>: Border
+                color of the title of the AI chat
               </li>
             </ul>
           </p>
