@@ -1,4 +1,4 @@
-import ollama from "ollama";
+import ollama from "ollama/browser";
 import { Message, useChatStore } from "@/store/ChatStore";
 
 export async function sendAiMessage() {

@@ -1,4 +1,4 @@
-import { FilePlus, FolderOpen } from "lucide-react";
+import { FilePlus } from "lucide-react";
 
 import {
   readNotesDir,
@@ -49,15 +49,14 @@ function NotesSidebar(props: {
   return (
     <div className="grid grid-rows-[50px_1fr] h-full gap-5">
       <div className="flex items-center justify-between min-h-[50px] panel px-3">
-        <FolderOpen width={30} height={30} className="cursor-pointer" />
-        <h1 className="text-3xl">Notes</h1>
-
         <FilePlus
           onClick={handleCreateNote}
           width={30}
           height={30}
           className="cursor-pointer"
         />
+        <h1 className="text-3xl">Notes</h1>
+        <div className="w-[30px]" />
       </div>
       <div className="overflow-y-scroll px-2">
         {notes.map((note) => {
