@@ -1,0 +1,490 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: Inter;
+  src: url("src/fonts/Inter/Inter-Normal-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/src/fonts/Noto/NotoSans-Normal-Variable.ttf");
+}
+
+@font-face {
+  font-family: Outfit;
+  src: url("src/fonts/Outfit/Outfit-Variable.ttf");
+}
+
+@font-face {
+  font-family: "Funnel Sans";
+  src: url("src/fonts/Funnel_Sans/FunnelSans-Variable.ttf");
+}
+
+* {
+  user-select: none;
+  box-sizing: border-box;
+  caret-color: var(--caret-color, var(--color));
+}
+
+body {
+  background: var(--background);
+  color: var(--color);
+  overflow: hidden;
+}
+
+button,
+.button {
+  background: var(--button-bg);
+  color: var(--button-color, var(--color));
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover,
+.button:hover {
+  background: var(--button-hover);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: 25px 1fr;
+  height: 100vh;
+  width: 100%;
+  grid-template-areas: "titlebar titlebar" "sidebar main";
+  overflow-x: hidden;
+  /* overflow-y: scroll; */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.titlebar {
+  background: var(
+    --titlebar-bg-color,
+    var(--sidebar-bg-color, var(--background))
+  );
+  color: var(--titlebar-text-color, var(--color));
+  box-shadow: 0px 1px 4px
+    var(
+      --titlebar-shadow-color,
+      var(--sidebar-shadow-color, var(--panel-bg, white))
+    );
+  z-index: 100;
+  grid-area: titlebar;
+}
+.titlebar-button {
+  align-content: center;
+  justify-content: center;
+  cursor: default;
+  padding: 5px 7px;
+  transition: background 0.2s ease-in-out;
+}
+.titlebar-button:not(.close):hover {
+  background: var(
+    --titlebar-button-hover,
+    var(--button-hover, var(--titlebar-shadow-color, var(--background)))
+  );
+}
+.titlebar-button.close:hover {
+  background: red;
+}
+
+.top-clock {
+  background: var(--top-clock-bg, var(--titlebar-bg-color, var(--background)));
+  color: var(--top-clock-color, var(--titlebar-text-color, var(--color)));
+  box-shadow: 0px 1px 4px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+  padding: 5px 7px;
+  z-index: 1000;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  -webkit-box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+  -moz-box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+  box-shadow: 0px 4px 10px 6px
+    var(
+      --top-clock-shadow,
+      var(--titlebar-shadow-color, var(--panel-bg, white))
+    );
+}
+
+.sidebar {
+  background: var(
+    --sidebar-bg-color,
+    var(--titlebar-bg-color, var(--background))
+  );
+  color: var(--sidebar-text-color, var(--color));
+  box-shadow: 2px 0px 4px -1px var(--sidebar-shadow-color, var(--titlebar-shadow-color, var(--panel-bg, white)));
+  grid-area: sidebar;
+}
+
+.sidebar-icon {
+  box-sizing: border-box;
+  border-radius: 5px;
+  transition: all 200ms ease-in-out;
+  border: 4px solid
+    var(
+      var(--sidebar-shadow-color, var(--sidebar-text-color, var(--background)))
+    );
+}
+
+.sidebar-icon:hover {
+  background: var(
+    --sidebar-icon-hover,
+    var(--sidebar-shadow-color, var(--background))
+  );
+  opacity: 1;
+}
+
+.sidebar-icon.active {
+  border: 2px solid
+    var(--sidebar-active-border, var(--sidebar-shadow-color, var(--background)));
+  background: var(
+    --sidebar-active-color,
+    var(--sidebar-shadow-color, var(--background))
+  );
+}
+
+.app > main {
+  grid-area: main;
+}
+
+.page {
+  display: flex;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.panel {
+  background: var(--panel-bg);
+  overflow: hidden;
+  border-radius: 5px;
+  transition: all 200ms ease-in-out;
+}
+
+.home-timer {
+  border-radius: 25px;
+}
+
+.timer-text-break {
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+
+.timer-controls > button {
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--timer-button-bg, var(--button-bg));
+}
+
+.timer-controls > button:hover {
+  background: var(--timer-button-hover, var(--button-hover));
+}
+
+.task-list-add-button {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background: var(--button-bg);
+  color: var(--button-color);
+}
+
+.task-list-add-button:hover {
+  background: var(--button-hover, var(--sidebar-icon-hover));
+}
+
+.task-item-title,
+.task-item-description:not(.show) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.task-item-description {
+  cursor: pointer;
+}
+
+.task-item-description.show {
+  max-height: 100px;
+  overflow-y: scroll;
+  word-wrap: break-word;
+}
+
+.circle-alert {
+  color: var(--circle-alert, (var(--color)));
+}
+
+.triangle-alert {
+  color: var(--triangle-alert, #f59e0b);
+}
+
+.octagon-alert {
+  color: var(--octagon-alert, #ef4444);
+}
+
+.task-item.complete {
+  opacity: var(--task-item-complete-opacity, 0.5);
+}
+
+.task-item-actions > button {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  background: var(--task-action-bg, var(--button-bg));
+  color: var(--task-action-color, var(--button-color));
+}
+
+.right-task-close {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+  background: var(
+    --right-task-close-bg,
+    var(--button-bg, var(--sidebar-icon-hover, var(--color)))
+  );
+  color: var(--right-task-close-color, var(--button-color, var(--background)));
+}
+
+.right-task-close:hover {
+  background: var(
+    --right-task-close-hover,
+    var(--button-hover, var(--panel-bg))
+  );
+}
+
+.right-task.panel {
+  transform: translate(80vw);
+  flex: 0;
+  margin: 0;
+  transition: all 500ms ease-in-out;
+}
+.right-task.panel.active {
+  flex: 1;
+  margin-left: 0.25rem;
+  transform: translate(0);
+}
+
+input:not(.exclude),
+.input,
+textarea:not(.exclude) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  resize: none;
+  padding: 5px 10px;
+  background: var(--input-bg, var(--panel-bg, var(--background)));
+  color: var(--input-text, var(--color));
+  border: 1px solid var(--input-border, var(--color));
+  border-radius: 5px;
+  transition: all 200ms ease-in-out;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid var(--input-active-border, var(--color));
+  outline: none;
+}
+
+.dropdown-button {
+  border: 2px solid
+    var(--dropdown-button-border, var(--input-border, var(--color)));
+  background: var(--dropdown-button-bg, var(--button-bg, var(--background)));
+  border-radius: 10px;
+  font-size: large;
+  max-width: 150px;
+}
+
+.dropdown-content {
+  background: var(
+    --dropdown-content-bg,
+    var(--input-bg, var(--panel-bg, var(--background)))
+  );
+  color: var(--dropdown-content-color, var(--input-text, var(--color)));
+  border: 1px solid
+    var(--dropdown-content-border, var(--input-border, var(--color)));
+  border-radius: 10px;
+}
+
+.dropdown-value {
+  transition: all 100ms ease-in;
+}
+
+.dropdown-value.first {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.dropdown-value.last {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dropdown-value.selected {
+  background: var(--dropdown-selected-bg, var(--background));
+}
+
+.dropdown-value:hover {
+  background: var(
+    --dropdown-value-hover-bg,
+    var(--button-hover, var(--input-bg))
+  );
+}
+
+.checkbox {
+  background: var(--checkbox-bg, var(--button-bg, var(--background)));
+  transition: all 150ms ease-in-out;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  background: var(--checkbox-hover, var(--button-hover, var(--background)));
+}
+
+.checkbox.checked {
+  background: var(--checkbox-checked-bg, var(--button-bg, var(--button-bg)));
+  color: var(--checkbox-checked-color, var(--button-color, var(--background)));
+}
+
+.left-notes.panel {
+  transition: none;
+}
+.right-notes.panel {
+  transition: none;
+}
+
+.note-side {
+  border: 2px solid var(--note-side-border, var(--color));
+  border-radius: 5px;
+}
+
+.note-side.pinned {
+  border: 2px solid var(--note-side-pinned-border, var(--color));
+  background: var(--note-side-pinned-bg, var(--panel-bg, none));
+}
+
+.note-side-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+.settings-container {
+  grid-area: sidebar main;
+  background: var(--settings-bg, none);
+}
+
+.settings-theme {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+}
+
+.settings-theme > .theme-controls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+
+.show-chat-button {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  border-radius: 5px;
+  background: var(
+    --show-chat-button-bg,
+    var(--button-bg, var(--sidebar-icon-hover, var(--color)))
+  );
+  color: var(--show-chat-button-color, var(--button-color, var(--color)));
+  border: 1px solid
+    var(
+      --show-chat-button-border,
+      var(--button-border, var(--sidebar-shadow-color, var(--background)))
+    );
+}
+
+.show-chat-button:hover {
+  background: var(
+    --show-chat-button-hover,
+    var(--button-hover, var(--sidebar-icon-hover, var(--color)))
+  );
+}
+
+.chat-info {
+  border: 2px solid var(--input-border);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.ai-chat {
+  background: var(--ai-chat-bg, var(--background));
+  color: var(--ai-chat-color, var(--color));
+  border: 1px solid var(--ai-chat-border, var(--color));
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.chat-user {
+  background: var(--chat-user-bg, var(--chat-message-bg, var(--background)));
+  color: var(--chat-user-color, var(--chat-message-color, var(--color)));
+  border: 1px solid
+    var(--chat-user-border, var(--chat-message-border, var(--color)));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.chat-bot {
+  background: var(--chat-bot-bg, var(--chat-message-bg, var(--background)));
+  color: var(--chat-bot-color, var(--chat-message-color, var(--color)));
+  border: 1px solid
+    var(--chat-bot-border, var(--chat-message-border, var(--color)));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+.chat-actions-hover {
+  opacity: 0;
+  position: absolute;
+  transition: all 200ms ease-in-out;
+}
+
+.chat-actions:hover .chat-actions-hover {
+  visibility: visible;
+  transform: translateY(-25px);
+  opacity: 1;
+}
+
+.chat-title {
+  border-bottom: 1px solid var(--chat-title-border, var(--color));
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+  transition: all 200ms ease-in-out;
+  background: var(--chat-title-bg, var(--background));
+  color: var(--chat-title-color, var(--color));
+}
