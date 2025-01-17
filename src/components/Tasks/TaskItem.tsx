@@ -19,7 +19,7 @@ export function TaskItem(props: {
   return (
     <div
       className={
-        "task-item panel max-w-[500px] min-w-[50px] w-[100%] p-2 my-2" +
+        "task-item panel max-w-full min-w-[50px] w-[100%] p-2 my-2" +
         " " +
         (isCompleted ? "complete" : "")
       }
@@ -32,25 +32,18 @@ export function TaskItem(props: {
         <div className="w-2/3 justify-items-start task-item-title">
           <p
             className={
-              "task-item-title text-start hover:underline hover:cursor-alias" +
+              "task-item-title text-start hover:underline" +
               " " +
-              (isCompleted ? "line-through" : "")
+              (isCompleted ? "line-through" : "") +
+              " " +
+              (showDescription ? "cursor-alias" : "cursor-help")
             }
-            onClick={() => props.setEditingTask(props.task)}
+            onClick={() => setShowDescription(!showDescription)}
+            onDoubleClick={() => props.setEditingTask(props.task)}
           >
             {props.task.title}
           </p>
         </div>
-        <p
-          className={
-            "task-item-description w-1/3 hover:underline hover:cursor-help " +
-            " " +
-            (showDescription ? "hidden" : "")
-          }
-          onClick={() => setShowDescription(!showDescription)}
-        >
-          {props.task.description}
-        </p>
         <div className="flex gap-2">
           {props.task.priority === "low" ? (
             <CircleAlert className="circle-alert" />
@@ -69,7 +62,7 @@ export function TaskItem(props: {
       {showDescription ? (
         <p
           className={
-            "task-item-description w-full pb-5 p-2" +
+            "task-item-description w-full pb-5 p-2 hover:cursor-pointer" +
             " " +
             (showDescription ? "show" : "hidden")
           }
@@ -81,10 +74,3 @@ export function TaskItem(props: {
     </div>
   );
 }
-// {props.task.priority === "low" ? (
-//   <CircleAlert />
-// ) : props.task.priority === "medium" ? (
-//   <TriangleAlert />
-// ) : props.task.priority === "high" ? (
-//   <OctagonAlert />
-// ) : null}

@@ -6,7 +6,6 @@ import { setPage } from "@/store/PageStore";
 import { useTaskStore } from "@/store/TaskStore";
 
 function Tasks(props: { addTask: boolean }) {
-  // const tasks = useTaskStore((state) => state.tasks);
   const editingTask = useTaskStore((state) => state.editingTask);
   const [rightPanelActive, setRightPanelActive] = useState(props.addTask);
 
@@ -15,24 +14,22 @@ function Tasks(props: { addTask: boolean }) {
     setPage("tasks", { addTask: false });
   };
   return (
-    <div className="task page">
+    <div className="task page flex">
       <div
         className={
-          "left-task panel flex-1 place-items-center justify-center" +
-          " " +
-          (!rightPanelActive && !editingTask ? "p-5" : "")
+          "left-task panel flex-1 place-items-center justify-center p-5"
         }
       >
         <div className="w-full items-center h-full">
           <TaskList
             handleAddTask={handleAddTask}
-            className="h-full w-full grid-cols-1 place-items-center"
+            className="h-full w-full place-items-center"
           />
         </div>
       </div>
       <div
         className={
-          "right-task panel ml-1" +
+          "right-task panel ml-1 flex-1" +
           " " +
           (rightPanelActive || editingTask ? "active" : "")
         }

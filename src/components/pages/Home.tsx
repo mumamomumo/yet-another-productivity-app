@@ -21,19 +21,16 @@ function Home() {
   useEffect(() => {
     const minWidth = Math.max(300 * open.length + 100, 400);
     appWindow.setMinSize(new PhysicalSize(minWidth, 400));
-    const resizeWindow = async () => {
-      const currentSize = await appWindow.outerSize();
-      if (currentSize.width < minWidth) {
-        appWindow.setSize(new PhysicalSize(minWidth, 400));
-      }
-    };
-    resizeWindow();
   }, [open]);
 
   return (
     <div className="home page p-0 flex gap-2">
       {/* Task list */}
-      {open.includes("tasks") && <TaskList className="flex-1 panel" />}
+      {open.includes("tasks") && (
+        <div className="flex-1 panel">
+          <TaskList className="h-full w-full" />
+        </div>
+      )}
       {/* Timer */}
       {open.includes("timer") && (
         <div className="flex-1 h-full flex items-center justify-center">

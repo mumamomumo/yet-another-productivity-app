@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "yet-another-productivity-app",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "identifier": "another-productivity-app",
   "build": {
     "frontendDist": "../dist",

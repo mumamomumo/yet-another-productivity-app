@@ -49,7 +49,7 @@ function AddTaskComponent(props: {
 
       addTask(newTask);
     }
-    
+
     titleRef.current!.value = "";
     descriptionRef.current!.value = "";
     setPriority("low");
