@@ -32,8 +32,8 @@ function Settings(props: { setSettingsOpen: Function }) {
 
   return (
     <>
-      <div className="settings-container w-screen h-screen z-40 backdrop-blur-[1px]"/>
-      <div className="settings-modal fixed backdrop-blur-[4px] top-[8vh] left-[10vw] w-[85vw] h-[84vh] border-2 rounded-md z-50">
+      <div className="settings-container w-screen h-screen z-40 backdrop-blur-[1px]" />
+      <div className="settings-modal fixed backdrop-blur-[4px] top-[8vh] left-[10vw] w-[85vw] h-[84vh] border-2 rounded-md z-50 overflow-scroll">
         <div className="settings-header flex items-center justify-between">
           <X
             className="w-8 h-8 cursor-pointer settings-close"
@@ -43,6 +43,7 @@ function Settings(props: { setSettingsOpen: Function }) {
           <div />
         </div>
         <hr />
+        {/* Settings */}
         <div className="settings-theme p-2 justify-between items-center">
           <div className="flex items-center justify-between">
             <h2 className="col-span-1 col-start-1">Theme</h2>

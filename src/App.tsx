@@ -7,7 +7,7 @@ import { useThemeStore } from "./store/ThemeStore";
 import { useSettingsStore } from "./store/GeneralSettings";
 import { LoadData } from "./data/DataManager";
 import { savePageData } from "./data/PageData";
-
+import { useTimerStore } from "./store/TimerStore";
 // Components
 import Titlebar from "./components/ui/Titlebar";
 import SidebarComponent from "./components/ui/Sidebar";
@@ -30,11 +30,17 @@ function App() {
   const page = usePageStore((state) => state.page);
   const pageProps = usePageStore((state) => state.pageProps);
   const { settings } = useSettingsStore();
+  const { paused, pomodori, setPomodoriLeft, workTime, breakTime } =
+    useTimerStore();
 
   // Keybinds
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
-      if (e.ctrlKey && (e.key === "k" || e.key === "r")) {
+      if (
+        e.ctrlKey &&
+        (e.key === "k" ||
+          (e.key === "r" && !(process.env.NODE_ENV === "development")))
+      ) {
         e.preventDefault();
       }
 
@@ -49,7 +55,7 @@ function App() {
         setPage("notes");
       }
       if (e.ctrlKey && e.key === "p") {
-        e.preventDefault()
+        e.preventDefault();
         setSettingsOpen(true);
         console.log(settingsOpen);
       }
@@ -70,7 +76,37 @@ function App() {
   useEffect(() => {
     savePageData();
   }, [page]);
-
+  // Timer
+  const handlePomodoroTimer = () => {
+    useTimerStore.setState((state) => {
+      const { timer, onBreak, pomodoriLeft } = state;
+      if (timer <= 0) {
+        if (onBreak) {
+          return {
+            timer: workTime * 60,
+            onBreak: false,
+          };
+        } else {
+          return {
+            timer: breakTime * 60,
+            onBreak: true,
+            pomodoriLeft: pomodoriLeft - 1,
+          };
+        }
+      }
+      return { timer: timer - 1 };
+    });
+  };
+  let interval: NodeJS.Timeout;
+  useEffect(() => {
+    if (!paused) {
+      setPomodoriLeft(pomodori);
+      interval = setInterval(handlePomodoroTimer, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [paused]);
   return (
     <div className="app h-screen w-screen">
       <Titlebar />

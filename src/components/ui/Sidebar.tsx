@@ -1,12 +1,13 @@
-import { Home, PenLine, Notebook, Settings, Info } from "lucide-react";
+import { PenLine, Notebook, Settings, Info } from "lucide-react";
 import { usePageStore, PageName } from "@/store/PageStore";
+import HomeIcon from "./HomeIcon";
 
 const { setPage } = usePageStore.getState();
 const ICON_SIZE = 35;
 const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
   {
     name: "home",
-    icon: <Home width={ICON_SIZE} height={ICON_SIZE} />,
+    icon: <HomeIcon width={ICON_SIZE} height={ICON_SIZE} />,
     tooltip: "home",
   },
   {
@@ -40,7 +41,7 @@ function SidebarComponent(props: {
             <div
               key={items.name}
               className={
-                "sidebar-icon p-1 m-2 " + (page === items.name ? " active" : "")
+                "sidebar-icon p-1 m-2" + (page === items.name ? " active" : "")
               }
               onClick={() => setPage(items.name)}
             >
@@ -48,7 +49,7 @@ function SidebarComponent(props: {
             </div>
           );
         })}
-        <div className=" ">
+        <div>
           <Info
             className="sidebar-icon p-1 mx-2"
             width={ICON_SIZE}

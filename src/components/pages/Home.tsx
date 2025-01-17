@@ -1,40 +1,63 @@
+//  Components
 import TaskList from "../Tasks/TaskList";
 import NotesSidebar from "../Notes/NotesSidebar";
-import { useState } from "react";
-import NoteEditor from "../Notes/NoteEditorArea";
-import { useNoteStore } from "@/store/NotesStore";
 import Timer from "../Home/Timer";
+import NoteEditor from "../Notes/NoteEditorArea";
 
+//  Hooks
+import { useEffect, useState } from "react";
+import { useNoteStore } from "@/store/NotesStore";
+import { useHomeLayoutStore } from "@/store/HomeLayoutStore";
+
+// Tauri
+import { getCurrentWindow, PhysicalSize } from "@tauri-apps/api/window";
+
+const appWindow = getCurrentWindow();
 function Home() {
   const [openNote, setOpenNote] = useState<string | null>(null);
   const { notes } = useNoteStore();
+  const { open } = useHomeLayoutStore();
+
+  useEffect(() => {
+    const minWidth = Math.max(300 * open.length + 100, 400);
+    appWindow.setMinSize(new PhysicalSize(minWidth, 400));
+    const resizeWindow = async () => {
+      const currentSize = await appWindow.outerSize();
+      if (currentSize.width < minWidth) {
+        appWindow.setSize(new PhysicalSize(minWidth, 400));
+      }
+    };
+    resizeWindow();
+  }, [open]);
+
   return (
     <div className="home page p-0 flex gap-2">
       {/* Task list */}
-      <TaskList className="flex-1 panel" />
-      <div className="flex-1 h-full">
-        {/* Timer */}
-        <div className="flex flex-col h-full justify-center p-1">
-          <div className="home-timer panel py-5">
+      {open.includes("tasks") && <TaskList className="flex-1 panel" />}
+      {/* Timer */}
+      {open.includes("timer") && (
+        <div className="flex-1 h-full flex items-center justify-center">
+          <div className="home-timer panel py-5 max-w-[600px] min-w-[30vw] min-h-[30vh] max-h-[70vh] overflow-y-scroll">
             <Timer />
           </div>
-          <div />
         </div>
-      </div>
-      <div className="flex-1 panel">
-        {/* Note Editor */}
-        {openNote ? (
-          <NoteEditor
-            openNote={notes.find((item) => item.id == openNote)}
-            setOpenNote={setOpenNote}
-          />
-        ) : (
-          <NotesSidebar
-            setOpenNote={setOpenNote}
-            className=" p-2 h-full overflow-hidden"
-          />
-        )}
-      </div>
+      )}
+      {/* Note Editor */}
+      {open.includes("notes") && (
+        <div className="flex-1 panel">
+          {openNote ? (
+            <NoteEditor
+              openNote={notes.find((item) => item.id == openNote)}
+              setOpenNote={setOpenNote}
+            />
+          ) : (
+            <NotesSidebar
+              setOpenNote={setOpenNote}
+              className=" p-2 h-full overflow-hidden"
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

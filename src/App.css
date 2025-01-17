@@ -167,6 +167,36 @@ input::-webkit-inner-spin-button {
   );
 }
 
+.layout-icons {
+  background: var(--layout-icons-bg, var(--background));
+  transition-property: opacity transform;
+  transition-duration: 200ms;
+  transform: translateX(-100px);
+  opacity: 0;
+  z-index: -10;
+}
+
+.home-icons:hover .layout-icons {
+  opacity: 1;
+  transform: translateX(38px);
+}
+
+.layout-icons button {
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+}
+.layout-icons button:hover {
+  background: var(--layout-icons-hover-bg, var(--sidebar-icon-hover));
+}
+.layout-icons .active {
+  background: var(--layout-icons-active-bg, var(--background));
+  border: 2px solid
+    var(
+      --layout-icons-active-border,
+      var(--sidebar-active-color, var(--background))
+    );
+}
+
 .app > main {
   grid-area: main;
 }
@@ -179,7 +209,6 @@ input::-webkit-inner-spin-button {
 
 .panel {
   background: var(--panel-bg);
-  overflow: hidden;
   border-radius: 5px;
   transition: all 200ms ease-in-out;
 }
@@ -192,6 +221,13 @@ input::-webkit-inner-spin-button {
   font-weight: 500;
   letter-spacing: 1px;
   text-decoration: underline;
+}
+
+.timer-text-time {
+  font-family: Funnel Sans;
+  font-weight: 100;
+  font-size: 3rem;
+  letter-spacing: 1px;
 }
 
 .timer-controls > button {

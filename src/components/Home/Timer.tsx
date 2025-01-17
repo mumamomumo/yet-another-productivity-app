@@ -53,41 +53,6 @@ function Timer() {
     }
   }, [pomodori]);
 
-  //Function to handle the pomodoro timer
-  const handlePomodoroTimer = () => {
-    useTimerStore.setState((state) => {
-      const { timer, onBreak, pomodoriLeft } = state;
-      if (timer <= 0) {
-        if (onBreak) {
-          return {
-            timer: workTime * 60,
-            onBreak: false,
-          };
-        } else {
-          return {
-            timer: breakTime * 60,
-            onBreak: true,
-            pomodoriLeft: pomodoriLeft - 1,
-          };
-        }
-      }
-
-      return { timer: timer - 1 };
-    });
-  };
-
-  // Pausing and unpausing the timer
-  var interval: NodeJS.Timeout;
-  useEffect(() => {
-    if (!paused) {
-      setPomodoriLeft(pomodori);
-      interval = setInterval(handlePomodoroTimer, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [paused]);
-
   // Reset button function
   const resetTime = () => {
     setPaused(true);
@@ -97,7 +62,9 @@ function Timer() {
   };
 
   return (
-    <div className={"timer-component" + " " + (onBreak ? "on-break" : "")}>
+    <div
+      className={"timer-component w-full" + " " + (onBreak ? "on-break" : "")}
+    >
       <div className="flex justify-between px-5">
         {/* Set focus */}
         {/* {props.focusTimer ? (
@@ -117,11 +84,10 @@ function Timer() {
             />
           </>
         )} */}
-        
       </div>
-      <div className="timer text-center py-2">
+      <div className="timer text-center py-2 w-full">
         <p className="timer-text-break">{onBreak ? "Break" : "Session"}</p>
-        <span className="timer-text-time text-7xl">{formatTime(timer)}</span>
+        <p className="timer-text-time w-full">{formatTime(timer)}</p>
         <p>Pomodoro left: {pomodoriLeft}</p>
         {showWarning ? (
           <p
