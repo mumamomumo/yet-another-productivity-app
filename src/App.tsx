@@ -81,6 +81,8 @@ function App() {
     useTimerStore.setState((state) => {
       const { timer, onBreak, pomodoriLeft } = state;
       if (timer <= 0) {
+        if (pomodoriLeft <= 0)
+          return { paused: true, onBreak: false, timer: 0 };
         if (onBreak) {
           return {
             timer: workTime * 60,
