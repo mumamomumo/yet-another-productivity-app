@@ -14,22 +14,13 @@ function Tasks(props: { addTask: boolean }) {
     setPage("tasks", { addTask: false });
   };
   return (
-    <div className="task page flex">
-      <div
-        className={
-          "left-task panel flex-1 place-items-center justify-center p-5"
-        }
-      >
-        <div className="w-full items-center h-full">
-          <TaskList
-            handleAddTask={handleAddTask}
-            className="h-full w-full place-items-center"
-          />
-        </div>
+    <div className="task page">
+      <div className={"left-task panel p-5 w-full bg-white"}>
+        <TaskList handleAddTask={handleAddTask} className="h-full" />
       </div>
       <div
         className={
-          "right-task panel ml-1 flex-1" +
+          "right-task panel p-5 bg-white" +
           " " +
           (rightPanelActive || editingTask ? "active" : "")
         }

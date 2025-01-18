@@ -77,7 +77,9 @@ function Settings(props: { setSettingsOpen: Function }) {
           <div>
             <CustomCheckbox
               checked={settings.topClock!}
-              onCheckChanged={(value) => setSettings({ topClock: value })}
+              onCheckChanged={(value) => {
+                setSettings({ topClock: value, showDate: value });
+              }}
             />
           </div>
         </div>
@@ -86,7 +88,7 @@ function Settings(props: { setSettingsOpen: Function }) {
             <li>Show Date</li>
             <div>
               <CustomCheckbox
-                checked={settings.showDate!}
+                checked={settings.showDate || false}
                 onCheckChanged={(value) => setSettings({ showDate: value })}
               />
             </div>
@@ -97,7 +99,7 @@ function Settings(props: { setSettingsOpen: Function }) {
           <h2 className="col-span-1 col-start-1">Enable AI Chat</h2>
           <div>
             <CustomCheckbox
-              checked={settings.topClock!}
+              checked={settings.enableAI || false}
               onCheckChanged={(value) => setSettings({ enableAI: value })}
             />
           </div>

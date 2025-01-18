@@ -19,24 +19,24 @@ export function TaskItem(props: {
   return (
     <div
       className={
-        "task-item panel max-w-full min-w-[50px] w-[100%] p-2 my-2" +
+        "task-item panel max-w-full min-w-[50px] p-2 my-2" +
         " " +
         (isCompleted ? "complete" : "")
       }
     >
-      <div className="flex rounded-md items-center justify-around text-l gap-3">
+      <div className="flex rounded-md items-center justify-around gap-3">
         <CustomCheckbox
           checked={isCompleted}
           onCheckChanged={(value) => setIsCompleted(value)}
         />
-        <div className="w-2/3 justify-items-start task-item-title">
+        <div className="justify-items-start ">
           <p
             className={
-              "task-item-title text-start hover:underline" +
+              "task-item-title text-start hover:underline max-w-[15vw]" +
               " " +
               (isCompleted ? "line-through" : "") +
               " " +
-              (showDescription ? "cursor-alias" : "cursor-help")
+              (showDescription ? "cursor-alias " : "cursor-help")
             }
             onClick={() => setShowDescription(!showDescription)}
             onDoubleClick={() => props.setEditingTask(props.task)}

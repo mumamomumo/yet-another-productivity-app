@@ -25,9 +25,9 @@ function TaskList(props?: {
 
   return (
     <div className={props?.className ?? ""}>
-      <div className="h-full w-full text-center px-2 py-4 col-start-1">
+      <div className="h-full text-center px-2 py-4 col-start-1">
         <h1 className="task-list-title text-3xl pb-4">Tasks</h1>
-        <div className="task-list-items h-[80%] w-full overflow-scroll gap-2 place-items-center">
+        <div className="task-list-items h-[80%] overflow-scroll gap-2">
           {tasks.map((task) => {
             return (
               <TaskItem

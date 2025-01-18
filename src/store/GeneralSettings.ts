@@ -20,7 +20,8 @@ type SettingsStore = {
 
 export const useSettingsStore = create<SettingsStore>((set) => ({
   settings: defaultSettings,
-  setSettings: (settings) =>
-    set({ settings: { ...defaultSettings, ...settings } }),
+  setSettings: (settings) => {
+    set((state) => ({ settings: { ...state.settings, ...settings } }));
+  },
   resetSettings: () => set({ settings: defaultSettings }),
 }));

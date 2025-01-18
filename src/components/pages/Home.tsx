@@ -34,7 +34,7 @@ function Home() {
       {/* Timer */}
       {open.includes("timer") && (
         <div className="flex-1 h-full flex items-center justify-center">
-          <div className="home-timer panel py-5 max-w-[600px] min-w-[30vw] min-h-[30vh] max-h-[70vh] overflow-y-scroll">
+          <div className={"home-timer panel py-5 overflow-y-scroll w-full"}>
             <Timer />
           </div>
         </div>
