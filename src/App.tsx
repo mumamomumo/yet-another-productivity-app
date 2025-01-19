@@ -1,13 +1,15 @@
 import "./App.css";
 
 // Data
-import { loadTheme } from "./data/ThemeManager";
+import { loadTheme, updateFont } from "./data/ThemeManager";
 import { setPage, usePageStore } from "./store/PageStore";
 import { useThemeStore } from "./store/ThemeStore";
 import { useSettingsStore } from "./store/GeneralSettings";
 import { LoadData } from "./data/DataManager";
 import { savePageData } from "./data/PageData";
 import { useTimerStore } from "./store/TimerStore";
+import { saveSettingsLocal } from "@/data/SettingsData";
+
 // Components
 import Titlebar from "./components/ui/Titlebar";
 import SidebarComponent from "./components/ui/Sidebar";
@@ -109,6 +111,13 @@ function App() {
     }
     return () => clearInterval(interval);
   }, [paused]);
+
+  // Settings
+  useEffect(() => {
+    console.log("settings updated");
+    saveSettingsLocal();
+    updateFont(settings.font!);
+  }, [settings]);
   return (
     <div className="app h-screen w-screen">
       <Titlebar />

@@ -1,15 +1,17 @@
 import { create } from "zustand";
 
 export type GeneralSettings = {
-  topClock?: boolean;
-  showDate?: boolean;
-  enableAI?: boolean;
+  topClock: boolean;
+  showDate: boolean;
+  enableAI: boolean;
+  font: string;
 };
 
 export const defaultSettings: GeneralSettings = {
   topClock: true,
   showDate: true,
   enableAI: true,
+  font: "Arial",
 };
 
 type SettingsStore = {

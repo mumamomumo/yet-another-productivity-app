@@ -2,17 +2,18 @@ import { getThemes, localAppDataDir } from "@/data/ThemeManager";
 import { useThemeStore } from "@/store/ThemeStore";
 import { open } from "@tauri-apps/plugin-dialog";
 import { useSettingsStore } from "@/store/GeneralSettings";
-import { saveSettingsLocal } from "@/data/SettingsData";
 
 import { X, FolderOpen, RotateCcw } from "lucide-react";
 
 import DropdownMenu from "../ui/DropdownMenu";
 import CustomCheckbox from "../ui/CustomCheckbox";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function Settings(props: { setSettingsOpen: Function }) {
   const { themes, toggleTheme, theme } = useThemeStore();
   const { settings, setSettings } = useSettingsStore();
+
+  const fontRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFolder = async () => {
     open({
@@ -25,15 +26,22 @@ function Settings(props: { setSettingsOpen: Function }) {
       defaultPath: await localAppDataDir,
     });
   };
-
+  const handleFontSubmit = () => {
+    if (fontRef.current) {
+      console.log("Font submit");
+      setSettings({ ...settings, font: fontRef.current.value });
+    }
+  };
   useEffect(() => {
-    saveSettingsLocal();
-  }, [settings]);
-
+    if (fontRef.current) {
+      fontRef.current.value = settings.font || "Arial";
+    }
+  }, []);
   return (
     <>
       <div className="settings-container w-screen h-screen z-40 backdrop-blur-[1px]" />
       <div className="settings-modal fixed backdrop-blur-[4px] top-[8vh] left-[10vw] w-[85vw] h-[84vh] border-2 rounded-md z-50 overflow-scroll">
+        {/* Settings header */}
         <div className="settings-header flex items-center justify-between">
           <X
             className="w-8 h-8 cursor-pointer settings-close"
@@ -44,7 +52,20 @@ function Settings(props: { setSettingsOpen: Function }) {
         </div>
         <hr />
         {/* Settings */}
-        <div className="settings-theme p-2 justify-between items-center">
+        {/* Color and font */}
+        <div className="settings-font settings-item">
+          <h2>App font</h2>
+          <input
+            className="exclude max-w-[150px] h-[30px] py-1 bg-[var(--input-bg)] rounded-md p-2 text-sm duration-100 transition-[colors] focus:border-2 focus:border-border focus:outline-none"
+            ref={fontRef}
+            onBlur={handleFontSubmit}
+            onSubmit={handleFontSubmit}
+            defaultValue={settings.font}
+          />
+        </div>
+        <hr />
+        {/* Theme */}
+        <div className="settings-theme settings-item">
           <div className="flex items-center justify-between">
             <h2 className="col-span-1 col-start-1">Theme</h2>
             {theme === "light" ? (
@@ -72,7 +93,8 @@ function Settings(props: { setSettingsOpen: Function }) {
           </div>
         </div>
         <hr />
-        <div className="settings-clock flex justify-between items-center p-2">
+        {/* Clock */}
+        <div className="settings-clock settings-item">
           <h2 className="col-span-1 col-start-1">Enable Clock</h2>
           <div>
             <CustomCheckbox
@@ -84,7 +106,7 @@ function Settings(props: { setSettingsOpen: Function }) {
           </div>
         </div>
         {settings.topClock && (
-          <div className="settings-clock flex justify-between items-center p-2">
+          <div className="settings-clock settings-item">
             <li>Show Date</li>
             <div>
               <CustomCheckbox
@@ -95,7 +117,8 @@ function Settings(props: { setSettingsOpen: Function }) {
           </div>
         )}
         <hr />
-        <div className="settings-clock flex justify-between items-center p-2">
+        {/* Ai chat */}
+        <div className="settings-clock settings-item">
           <h2 className="col-span-1 col-start-1">Enable AI Chat</h2>
           <div>
             <CustomCheckbox

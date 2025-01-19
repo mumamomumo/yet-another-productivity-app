@@ -1,4 +1,8 @@
-import { useSettingsStore, GeneralSettings, defaultSettings } from "@/store/GeneralSettings";
+import {
+  useSettingsStore,
+  GeneralSettings,
+  defaultSettings,
+} from "@/store/GeneralSettings";
 
 export function saveSettingsLocal() {
   try {
@@ -15,10 +19,11 @@ export function loadSettingsLocal() {
   try {
     const settings = localStorage.getItem("settings");
     if (settings) {
+      console.log(settings);
       useSettingsStore.setState({
         settings: JSON.parse(settings) as GeneralSettings,
       });
-    } else{
+    } else {
       throw new Error("no settings found");
     }
   } catch (e) {

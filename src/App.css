@@ -224,7 +224,6 @@ input::-webkit-inner-spin-button {
 }
 
 .timer-text-time {
-  font-family: Funnel Sans;
   font-weight: 100;
   font-size: 3rem;
   letter-spacing: 1px;
@@ -421,6 +420,13 @@ textarea:focus {
 .settings-container {
   grid-area: sidebar main;
   background: var(--settings-bg, none);
+}
+
+.settings-item {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .settings-theme {

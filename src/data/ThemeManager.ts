@@ -74,9 +74,9 @@ const darkThemeStyle = `
 `;
 const blueThemeStyle = `
 :root {
-  --background: #627b8e;
+  --background: #425b6e;
   --color: white;
-  
+
   --titlebar-bg-color: #3e4c55;
   --titlebar-text-color: white;
   --titlebar-shadow-color: #a1a1a1;
@@ -206,9 +206,8 @@ export async function getThemes() {
 }
 
 var loadThemeTries = 0;
-
+const themeStyleId = "theme";
 export async function loadTheme(themeName: string) {
-  const themeStyleId = "theme";
   let themeStyle = document.getElementById(themeStyleId) as HTMLStyleElement;
   if (!themeStyle) {
     // Create the <style> element if it doesn't exist
@@ -273,5 +272,24 @@ export function loadThemeLocal() {
   } catch (e) {
     console.error("Error loading themes: ", e);
     getThemes();
+  }
+}
+
+// prettier-ignore
+const fontRe = new RegExp(`font-family: (.*);`, 'g');
+export function updateFont(font: string) {
+  let themeStyle = document.getElementById(themeStyleId) as HTMLStyleElement;
+  console.log(font);
+  if (themeStyle) {
+    const oldFont = themeStyle.textContent!.match(fontRe);
+    if (oldFont === null) {
+      console.log("writing to themes");
+      themeStyle.textContent += `*{font-family: ${font};}`;
+    } else {
+      themeStyle.textContent = themeStyle.textContent!.replace(
+        fontRe,
+        `font-family: ${font};`
+      );
+    }
   }
 }
