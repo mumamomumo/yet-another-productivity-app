@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "yet-another-productivity-app",
-  "version": "0.2.1",
+  "version": "0.3.1",
   "identifier": "another-productivity-app",
   "build": {
     "frontendDist": "../dist",
@@ -15,7 +15,6 @@
         "title": "yet-another-productivity-app",
         "width": 800,
         "height": 600,
-        "minWidth": 800,
         "minHeight": 500,
         "resizable": true,
         "fullscreen": false,

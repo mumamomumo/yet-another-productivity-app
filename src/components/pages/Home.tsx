@@ -20,7 +20,7 @@ function Home() {
 
   useEffect(() => {
     const minWidth = Math.max(300 * open.length + 100, 400);
-    appWindow.setMinSize(new PhysicalSize(minWidth, 400));
+    appWindow.setMinSize(new PhysicalSize(minWidth, 500));
   }, [open]);
 
   return (

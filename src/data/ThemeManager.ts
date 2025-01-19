@@ -278,12 +278,12 @@ export function loadThemeLocal() {
 // prettier-ignore
 const fontRe = new RegExp(`font-family: (.*);`, 'g');
 export function updateFont(font: string) {
-  let themeStyle = document.getElementById(themeStyleId) as HTMLStyleElement;
+  if (!font) return;
+  let themeStyle = document.getElementById("font") as HTMLStyleElement;
   console.log(font);
   if (themeStyle) {
     const oldFont = themeStyle.textContent!.match(fontRe);
     if (oldFont === null) {
-      console.log("writing to themes");
       themeStyle.textContent += `*{font-family: ${font};}`;
     } else {
       themeStyle.textContent = themeStyle.textContent!.replace(
