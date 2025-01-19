@@ -10,9 +10,11 @@ function DropdownMenu(props: {
   setVar?: Function;
   default?: string;
   className?: string;
+  textSize?: string;
 }) {
-  const [value, setValue] = useState(props.default ? props.default : props.values[0]);
-
+  const [value, setValue] = useState(
+    props.default ? props.default : props.values[0]
+  );
   useEffect(() => {
     if (props.setVar) {
       props.setVar(value);
@@ -21,8 +23,14 @@ function DropdownMenu(props: {
 
   return (
     <Popover key={props.values.toString()}>
-      <PopoverTrigger className={"dropdown-button" + " " + props.className}>
-        {capitalizeFirstLetter(value)}
+      <PopoverTrigger
+        className={
+          "dropdown-button w-full flex items-center justify-center whitespace-nowrap" +
+          " " +
+          props.className
+        }
+      >
+        <span className="text-[16px]">{capitalizeFirstLetter(value)}</span>
       </PopoverTrigger>
       <PopoverContent className="w-52 p-0 border-none">
         <div
@@ -34,7 +42,7 @@ function DropdownMenu(props: {
               <>
                 <button
                   className={
-                    "dropdown-value py-2" +
+                    "dropdown-value py-2 text-[16px]" +
                     " " +
                     (index === 0
                       ? "first"
