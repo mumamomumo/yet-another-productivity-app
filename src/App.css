@@ -2,26 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: Inter;
-  src: url("src/fonts/Inter/Inter-Normal-Variable.ttf");
-}
-
-@font-face {
-  font-family: "Noto Sans";
-  src: url("/src/fonts/Noto/NotoSans-Normal-Variable.ttf");
-}
-
-@font-face {
-  font-family: Outfit;
-  src: url("src/fonts/Outfit/Outfit-Variable.ttf");
-}
-
-@font-face {
-  font-family: "Funnel Sans";
-  src: url("src/fonts/Funnel_Sans/FunnelSans-Variable.ttf");
-}
-
 * {
   user-select: none;
   box-sizing: border-box;
@@ -519,4 +499,9 @@ textarea:focus {
   transition: all 200ms ease-in-out;
   background: var(--chat-title-bg, var(--background));
   color: var(--chat-title-color, var(--color));
+}
+
+.calendar {
+  height: 100%;
+  padding: 0.5rem;
 }

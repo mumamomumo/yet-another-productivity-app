@@ -7,8 +7,6 @@ export type Task = {
   priority: "low" | "medium" | "high";
   status: "todo" | "in-progress" | "done";
   order?: number;
-  dateStart?: Date;
-  dateEnd?: Date;
 };
 
 type TaskStore = {

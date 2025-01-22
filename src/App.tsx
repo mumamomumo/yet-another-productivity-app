@@ -18,6 +18,7 @@ import Notes from "./components/pages/Notes";
 import Tasks from "./components/pages/TaskPage";
 import Info from "./components/pages/Info";
 import Settings from "./components/pages/Settings";
+import Calendar from "./components/pages/Calendar";
 import Clock from "./components/Home/Clock";
 import { OllamaChatMenu } from "./components/ui/OllamaChatMenu";
 
@@ -130,19 +131,19 @@ function App() {
         {settings.enableAI && <OllamaChatMenu />}
         {settings.topClock && !(page === "info") && (
           <div className="text-[15px] flex justify-center">
-            <Clock className="fixed top-[3%]" hideDate={!settings.showDate} />
+            <Clock className="fixed top-[15px]" hideDate={!settings.showDate} />
           </div>
         )}
         {page === "home" ? (
-          <>
-            <Home />
-          </>
+          <Home />
         ) : page === "notes" ? (
           <Notes />
         ) : page === "tasks" ? (
           <Tasks {...pageProps} />
         ) : page === "info" ? (
           <Info setPage={usePageStore.getState().setPage} />
+        ) : page === "calendar" ? (
+          <Calendar />
         ) : null}
       </main>
     </div>

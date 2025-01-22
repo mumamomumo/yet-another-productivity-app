@@ -178,7 +178,6 @@ async function createThemeFolder() {
     getThemes();
   });
 }
-
 export async function getThemes() {
   await readDir(themeFolder, {
     baseDir,
@@ -204,7 +203,6 @@ export async function getThemes() {
       await createThemeFolder();
     });
 }
-
 var loadThemeTries = 0;
 const themeStyleId = "theme";
 export async function loadTheme(themeName: string) {
@@ -240,7 +238,6 @@ export async function loadTheme(themeName: string) {
     console.log("Loaded Theme", themeName);
   }
 }
-
 export async function saveThemeLocal() {
   try {
     localStorage.setItem("theme", useThemeStore.getState().theme);
@@ -252,7 +249,6 @@ export async function saveThemeLocal() {
     console.error("failed to save: ", e);
   }
 }
-
 export function loadThemeLocal() {
   try {
     var themes = localStorage.getItem("registered-themes");
@@ -274,7 +270,6 @@ export function loadThemeLocal() {
     getThemes();
   }
 }
-
 // prettier-ignore
 const fontRe = new RegExp(`font-family: (.*);`, 'g');
 export function updateFont(font: string) {

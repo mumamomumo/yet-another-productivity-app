@@ -1,4 +1,4 @@
-import { PenLine, Notebook, Settings, Info } from "lucide-react";
+import { PenLine, Notebook, Settings, Info, Calendar } from "lucide-react";
 import { usePageStore, PageName } from "@/store/PageStore";
 import HomeIcon from "./HomeIcon";
 
@@ -19,6 +19,11 @@ const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
     name: "notes",
     icon: <Notebook width={ICON_SIZE} height={ICON_SIZE} />,
     tooltip: "notes",
+  },
+  {
+    name: "calendar",
+    icon: <Calendar width={ICON_SIZE} height={ICON_SIZE} />,
+    tooltip: "calendar",
   },
 ];
 function SidebarComponent(props: {

@@ -1,7 +1,7 @@
 import { Task, useTaskStore } from "@/store/TaskStore";
 import { TaskItem } from "./TaskItem";
 import { setPage } from "@/store/PageStore";
-import { saveTasks } from "@/data/TaskData";
+import { saveTasks } from "@/data/TasksAndEventsData";
 import { useEffect } from "react";
 function TaskList(props?: {
   className?: string;

@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
 
 function CustomCheckbox(props: {
-  checked: boolean;
+  checked?: boolean;
   onCheckChanged?: (value: boolean) => any;
   className?: string;
   size?: number;
@@ -10,7 +10,7 @@ function CustomCheckbox(props: {
   const [isChecked, setIsChecked] = useState(props.checked);
 
   useEffect(() => {
-    props.onCheckChanged?.(isChecked);
+    props.onCheckChanged?.(isChecked || false);
   }, [isChecked]);
 
   return (

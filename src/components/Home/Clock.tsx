@@ -1,38 +1,5 @@
 import { useState, useEffect } from "react";
 
-export function formatDate(date: Date): string {
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const dayName = days[date.getDay()];
-  const monthName = months[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
-
-  return `${dayName}, ${day} ${monthName} ${year}`;
-}
-
 function Clock(props: { className?: string; hideDate?: boolean }) {
   const [time, setTime] = useState(new Date());
 
@@ -52,7 +19,9 @@ function Clock(props: { className?: string; hideDate?: boolean }) {
           <h1 className="time pt-1">
             {hours}:{minutes}:{seconds}
           </h1>
-          {!props.hideDate && <h1 className="date pt-1">{formatDate(time)}</h1>}
+          {!props.hideDate && (
+            <h1 className="date pt-1">{time.toDateString()}</h1>
+          )}
         </div>
       </div>
     </div>
