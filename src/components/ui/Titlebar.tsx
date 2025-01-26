@@ -48,14 +48,10 @@ function Titlebar() {
             />
           </div>
         )}
-<<<<<<< HEAD
         <div
           className="titlebar-buttons flex h-[100%] flex-1 justify-end"
           data-tauri-drag-region
         >
-=======
-        <div className="titlebar-buttons flex h-[100%] flex-1 justify-end">
->>>>>>> refs/remotes/origin/main
           <button
             className="titlebar-button minimize exclude"
             onClick={handleMinimize}
