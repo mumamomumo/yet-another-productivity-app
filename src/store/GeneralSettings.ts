@@ -5,6 +5,7 @@ export type GeneralSettings = {
   showDate: boolean;
   enableAI: boolean;
   font: string;
+  clearEvents: boolean;
 };
 
 export const defaultSettings: GeneralSettings = {
@@ -12,6 +13,7 @@ export const defaultSettings: GeneralSettings = {
   showDate: true,
   enableAI: true,
   font: "Arial",
+  clearEvents: true,
 };
 
 type SettingsStore = {

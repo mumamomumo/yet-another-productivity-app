@@ -85,7 +85,9 @@ function Info(props: { setPage: Function }) {
           Warning, there's quite a lot.
         </span>
         <br />
-        <span className="text-xs py-0 line-clamp-1">But you don't have to style all of them</span>
+        <span className="text-xs py-0 line-clamp-1">
+          But you don't have to style all of them
+        </span>
         {showVariables && (
           <p className="text-md">
             <span className="font-bold">Variables:</span>
@@ -194,6 +196,9 @@ function Info(props: { setPage: Function }) {
               <li>
                 <span className="font-bold">--panel-bg</span>: Default panel
                 background color
+              </li>
+              <li>
+                <span className="font-bold">--accent</span>: Accent color
               </li>
               <li>
                 <span className="font-bold">--task-list-add-button-bg</span>:

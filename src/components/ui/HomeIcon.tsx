@@ -11,7 +11,7 @@ function HomeIcon(props: { width: number | string; height: number | string }) {
   };
   return (
     <div className="home-icons flex items-center">
-      <Home width={props.width} height={props.height} />
+      <Home width={props.width} height={props.height} className="home-icon" />
       <div className="layout-icons absolute flex gap-2 p-1">
         <button
           className={"p-2 rounded-md" + " " + (taskOpen ? "active" : "")}

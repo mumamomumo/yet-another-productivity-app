@@ -1,10 +1,14 @@
 import { create } from "zustand";
 
+export type EventDateType = {
+  date: string;
+  hour: number;
+};
+
 export type EventType = {
   name: string;
   id: any;
-  start: Date;
-  end: Date;
+  start: EventDateType;
 };
 
 type EventStore = {
@@ -16,7 +20,19 @@ type EventStore = {
 };
 
 export const useEventStore = create<EventStore>((set) => ({
-  events: [],
+  events: [
+    {
+      name: "test",
+      id: 1,
+      start: {
+        date:
+          new Date().getDate().toString() +
+          new Date().getMonth() +
+          new Date().getFullYear(),
+        hour: 12,
+      },
+    },
+  ],
   addEvent: (event) =>
     set((state) => ({ ...state, events: [...state.events, event] })),
   deleteEvent: (id) =>

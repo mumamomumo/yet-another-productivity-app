@@ -118,12 +118,23 @@ function Settings(props: { setSettingsOpen: Function }) {
         )}
         <hr />
         {/* Ai chat */}
-        <div className="settings-clock settings-item">
+        <div className="settings-ai settings-item">
           <h2 className="col-span-1 col-start-1">Enable AI Chat</h2>
           <div>
             <CustomCheckbox
               checked={settings.enableAI || false}
               onCheckChanged={(value) => setSettings({ enableAI: value })}
+            />
+          </div>
+        </div>
+        <hr />
+        {/* Clear events */}
+        <div className="settings-delete-events settings-item">
+          <h2 className="col-span-1 col-start-1">Clear older events</h2>
+          <div>
+            <CustomCheckbox
+              checked={settings.clearEvents || false}
+              onCheckChanged={(value) => setSettings({ clearEvents: value })}
             />
           </div>
         </div>

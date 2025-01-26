@@ -1,14 +1,12 @@
 import { Note, useNoteStore } from "@/store/NotesStore";
 import { useEffect, useRef } from "react";
 import { renameNote, saveNote } from "@/data/NotesData";
-import { useSettingsStore } from "@/store/GeneralSettings";
 
 function NoteEditor(props: {
   openNote: Note | undefined;
   setOpenNote: (noteId: string | null) => void;
 }) {
   const { updateNote } = useNoteStore();
-  const { topClock } = useSettingsStore().settings;
   const noteTitleRef = useRef<HTMLInputElement>(null);
   const noteContentRef = useRef<HTMLTextAreaElement>(null);
 
@@ -59,9 +57,7 @@ function NoteEditor(props: {
               handleRenameNote(props.openNote!.id, noteTitleRef.current!.value);
             }
           }}
-          className={
-            "note-editor-title max-w-[900px]" + " " + (topClock ? "mt-6" : "")
-          }
+          className={"note-editor-title max-w-[900px]"}
           onBlur={(e) => handleRenameNote(props.openNote!.id, e.target.value)}
         />
         <textarea

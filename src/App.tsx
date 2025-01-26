@@ -1,15 +1,17 @@
 import "./App.css";
 
 // Data
+import { LoadData } from "./data/DataManager";
+import { savePageData } from "./data/PageData";
+import { saveSettingsLocal } from "@/data/SettingsData";
 import { loadTheme, updateFont } from "./data/ThemeManager";
+
+// Stores & Hooks
 import { setPage, usePageStore } from "./store/PageStore";
 import { useThemeStore } from "./store/ThemeStore";
 import { useSettingsStore } from "./store/GeneralSettings";
-import { LoadData } from "./data/DataManager";
-import { savePageData } from "./data/PageData";
 import { useTimerStore } from "./store/TimerStore";
-import { saveSettingsLocal } from "@/data/SettingsData";
-
+import { useEffect, useState } from "react";
 // Components
 import Titlebar from "./components/ui/Titlebar";
 import SidebarComponent from "./components/ui/Sidebar";
@@ -18,12 +20,8 @@ import Notes from "./components/pages/Notes";
 import Tasks from "./components/pages/TaskPage";
 import Info from "./components/pages/Info";
 import Settings from "./components/pages/Settings";
-import Calendar from "./components/pages/Calendar";
-import Clock from "./components/Home/Clock";
 import { OllamaChatMenu } from "./components/ui/OllamaChatMenu";
-
-// Normal imports
-import { useEffect, useState } from "react";
+import Calendar from "./components/pages/Calendar";
 
 LoadData();
 function App() {
@@ -75,10 +73,12 @@ function App() {
       localStorage.setItem("theme", theme);
     }
   }, [theme]);
+
   // Save page on page change
   useEffect(() => {
     savePageData();
   }, [page]);
+
   // Timer
   const handlePomodoroTimer = () => {
     useTimerStore.setState((state) => {
@@ -115,10 +115,10 @@ function App() {
 
   // Settings
   useEffect(() => {
-    console.log("settings updated");
     saveSettingsLocal();
     updateFont(settings.font!);
   }, [settings]);
+
   return (
     <div className="app h-screen w-screen">
       <Titlebar />
@@ -129,11 +129,6 @@ function App() {
       {settingsOpen ? <Settings setSettingsOpen={setSettingsOpen} /> : null}
       <main>
         {settings.enableAI && <OllamaChatMenu />}
-        {settings.topClock && !(page === "info") && (
-          <div className="text-[15px] flex justify-center">
-            <Clock className="fixed top-[15px]" hideDate={!settings.showDate} />
-          </div>
-        )}
         {page === "home" ? (
           <Home />
         ) : page === "notes" ? (
@@ -142,7 +137,7 @@ function App() {
           <Tasks {...pageProps} />
         ) : page === "info" ? (
           <Info setPage={usePageStore.getState().setPage} />
-        ) : page === "calendar" ? (
+        ) : page === "calendar" && process.env.NODE_ENV === "development" ? (
           <Calendar />
         ) : null}
       </main>
