@@ -48,14 +48,26 @@ function Titlebar() {
             />
           </div>
         )}
-        <div className="titlebar-buttons flex h-[100%] flex-1 justify-end">
-          <button className="titlebar-button minimize" onClick={handleMinimize}>
+        <div
+          className="titlebar-buttons flex h-[100%] flex-1 justify-end"
+          data-tauri-drag-region
+        >
+          <button
+            className="titlebar-button minimize exclude"
+            onClick={handleMinimize}
+          >
             <Minus height={15} />
           </button>
-          <button className="titlebar-button toggle" onClick={handleMaximize}>
+          <button
+            className="titlebar-button toggle exclude"
+            onClick={handleMaximize}
+          >
             <Square height={15} />
           </button>
-          <button className="titlebar-button close" onClick={handleClose}>
+          <button
+            className="titlebar-button close exclude"
+            onClick={handleClose}
+          >
             <X height={18} fontWeight={"bold"} />
           </button>
         </div>

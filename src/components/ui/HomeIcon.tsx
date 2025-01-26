@@ -1,6 +1,9 @@
 import { Home, PenLine, Clock, Notebook } from "lucide-react";
 import { useHomeLayoutStore } from "@/store/HomeLayoutStore";
-function HomeIcon(props: { width: number | string; height: number | string }) {
+function HomeIcon(props: {
+  width?: number | string;
+  height?: number | string;
+}) {
   const { open, setOpen } = useHomeLayoutStore();
   const taskOpen = open.includes("tasks");
   const clockOpen = open.includes("timer");

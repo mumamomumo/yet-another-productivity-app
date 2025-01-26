@@ -27,7 +27,7 @@ function EventItem(props: {
     }
   };
   return (
-    <div className="event-item mx-1 h-full justify-self-center items-center my-1 p-1 rounded-md flex flex-1 border justify-between gap-1">
+    <div className="event-item mx-1 h-full min-w-[50px] justify-self-center items-center my-1 p-1 rounded-md flex flex-1 border justify-between gap-1">
       <HoverCard openDelay={400} closeDelay={100}>
         <HoverCardTrigger>
           <p className="event-text rounded-md line-clamp-2">
@@ -42,7 +42,7 @@ function EventItem(props: {
           onClick={() => goingToDelete()}
         />
         <HoverCardContent className="event-hover-card w-[300px]">
-          <EventPopover event={props.event} />
+          <EventPopover event={props.event} updateEvent={props.updateEvent} />
         </HoverCardContent>
       </HoverCard>
     </div>

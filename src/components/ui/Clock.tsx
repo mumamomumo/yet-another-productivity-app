@@ -14,7 +14,10 @@ function Clock(props: { className?: string; hideDate?: boolean }) {
 
   return (
     <div className={props.className} data-tauri-drag-region>
-      <div className="flex top-clock gap-4" data-tauri-drag-region>
+      <div
+        className="flex top-clock gap-4 items-center justify-center"
+        data-tauri-drag-region
+      >
         <h1 className="time pt-1" data-tauri-drag-region>
           {hours}:{minutes}:{seconds}
         </h1>

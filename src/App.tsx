@@ -12,8 +12,10 @@ import { useThemeStore } from "./store/ThemeStore";
 import { useSettingsStore } from "./store/GeneralSettings";
 import { useTimerStore } from "./store/TimerStore";
 import { useEffect, useState } from "react";
+
 // Components
 import Titlebar from "./components/ui/Titlebar";
+import TitlebarMac from "./components/ui/TitlebarMac";
 import SidebarComponent from "./components/ui/Sidebar";
 import Home from "./components/pages/Home";
 import Notes from "./components/pages/Notes";
@@ -22,6 +24,9 @@ import Info from "./components/pages/Info";
 import Settings from "./components/pages/Settings";
 import { OllamaChatMenu } from "./components/ui/OllamaChatMenu";
 import Calendar from "./components/pages/Calendar";
+
+// Tauri
+import { type } from "@tauri-apps/plugin-os";
 
 LoadData();
 function App() {
@@ -48,7 +53,6 @@ function App() {
       if (e.altKey && e.key === "1") {
         setPage("home");
       }
-
       if (e.altKey && e.key === "2") {
         setPage("tasks");
       }
@@ -121,7 +125,8 @@ function App() {
 
   return (
     <div className="app h-screen w-screen">
-      <Titlebar />
+      {type() === "windows" && <Titlebar />}
+      {type() === "macos" && <TitlebarMac />}
       <SidebarComponent
         setOpenSettings={setSettingsOpen}
         openSettings={settingsOpen}

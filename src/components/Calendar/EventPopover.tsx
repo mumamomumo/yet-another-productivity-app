@@ -1,11 +1,27 @@
 import { EventType } from "@/store/Eventstore";
+import { useEffect, useRef } from "react";
+function EventPopover(props: {
+  event: EventType;
+  updateEvent?: (id: string, event: Partial<EventType>) => void;
+}) {
+  const eventTitleRef = useRef<HTMLInputElement>(null);
 
-function EventPopover(props: { event: EventType }) {
+  useEffect(() => {
+    if (eventTitleRef.current) {
+      eventTitleRef.current.value = props.event.name;
+    }
+  }, []);
+
+  const handleUpdateEvent = () => {
+    if (props.updateEvent) {
+      props.updateEvent(props.event.id, {
+        name: eventTitleRef.current!.value,
+      });
+    }
+  };
   return (
     <>
-      <p className="absolute text-[10px] opacity-30 top-0 left-2">
-        {props.event.id}
-      </p>
+      <input ref={eventTitleRef} onChange={handleUpdateEvent} />
       <p>{props.event.name}</p>
     </>
   );

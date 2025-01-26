@@ -23,7 +23,13 @@ export async function readNotesDir(): Promise<DirEntry[] | null> {
     );
     return notes;
   } catch (e) {
-    mkdir(await join(await localAppData, notesFolder));
+    try {
+      mkdir(await localAppData).then(async () => {
+        mkdir(await join(await localAppData, notesFolder));
+      });
+    } catch {
+      mkdir(await join(await localAppData, notesFolder));
+    }
     return readNotesDir();
   }
 }

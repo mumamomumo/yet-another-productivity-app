@@ -4,6 +4,10 @@
 
 * {
   user-select: none;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   box-sizing: border-box;
   caret-color: var(--caret-color, var(--color));
   border-color: var(--color);
@@ -22,6 +26,11 @@ button:not(.exclude),
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   border-radius: 6px;
+}
+
+button *:not(.exclude),
+.button *:not(.exclude) {
+  cursor: pointer;
 }
 
 button:not(.exclue):hover,
@@ -180,6 +189,7 @@ input::-webkit-datetime-edit {
   z-index: 100;
   grid-area: titlebar;
 }
+
 .titlebar-button {
   align-content: center;
   justify-content: center;
@@ -187,6 +197,7 @@ input::-webkit-datetime-edit {
   padding: 5px 7px;
   transition: background 0.2s ease-in-out;
 }
+
 .titlebar-button:not(.close):hover {
   background: var(
     --titlebar-button-hover,
@@ -195,6 +206,14 @@ input::-webkit-datetime-edit {
 }
 .titlebar-button.close:hover {
   background: red;
+}
+
+.titlebar-mac-button {
+  align-content: center;
+  justify-content: center;
+  cursor: default;
+  padding: 5px 7px;
+  transition: background 0.2s ease-in-out;
 }
 
 .top-clock {
@@ -546,13 +565,12 @@ input::-webkit-datetime-edit {
 }
 
 .date-today {
-  border-top-color: var(--date-today-bg, var(--accent));
-  border-left-color: var(--date-today-bg, var(--accent));
-  border-right-color: var(--date-today-bg, var(--accent));
+  border-color: var(--date-today-bg, var(--accent));
+  border-bottom-color: var(--calendar-button-border, var(--color));
 }
 
 .calendar-button {
-  border-top-color: black 0.4;
+  border-top: 1px solid var(--calendar-button-border, var(--color));
 }
 
 .event-item {

@@ -3,7 +3,7 @@ import { usePageStore, PageName } from "@/store/PageStore";
 import HomeIcon from "./HomeIcon";
 
 const { setPage } = usePageStore.getState();
-const ICON_SIZE = 35;
+const ICON_SIZE = 25;
 const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
   {
     name: "home",
@@ -12,7 +12,7 @@ const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
   },
   {
     name: "tasks",
-    icon: <PenLine width={ICON_SIZE} height={ICON_SIZE} />,
+    icon: <PenLine />,
     tooltip: "tasks",
   },
   {
@@ -38,7 +38,7 @@ function SidebarComponent(props: {
         className={
           props.className
             ? props.className
-            : "sidebar w-[50px] fixed h-full pt-[25px] justify-items-center "
+            : "sidebar w-[50px] fixed h-full pt-[25px] flex flex-col items-center"
         }
       >
         {menuItems.map((items) => {
@@ -46,7 +46,7 @@ function SidebarComponent(props: {
             <div
               key={items.name}
               className={
-                "sidebar-icon p-1 m-2" + (page === items.name ? " active" : "")
+                "sidebar-icon p-1 m-1" + (page === items.name ? " active" : "")
               }
               onClick={() => setPage(items.name)}
             >

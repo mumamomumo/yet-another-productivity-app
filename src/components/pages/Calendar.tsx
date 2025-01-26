@@ -278,7 +278,7 @@ function Calendar() {
                         />
                       ))}
                       <button
-                        className="flex-1 place-items-center group"
+                        className="flex-1 place-items-center flex justify-center group"
                         onClick={() => {
                           handleAddEvent(hour, toDay(time, index));
                         }}

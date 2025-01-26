@@ -115,14 +115,19 @@ const blueThemeStyle = `
 //#endregion
 
 async function createThemeFolder() {
-  console.log("Creating themes folder");
-  await mkdir(themeFolder, { baseDir })
-    .then(() => {
-      console.log("Created themes folder");
-    })
-    .catch((err) => {
-      console.error("Error creating themes folder", err);
-    });
+  try {
+    await mkdir(themeFolder, { baseDir }).then(() => {});
+  } catch {
+    try {
+      mkdir(await localAppDataDir).then(() => {
+        createThemeFolder();
+      });
+      return;
+    } catch {
+      createThemeFolder();
+      return;
+    }
+  }
 
   // Create a default theme
   const lightTheme = open(await join(themeFolder, "light.css"), {
@@ -134,9 +139,7 @@ async function createThemeFolder() {
     const data = encoder.encode(lightThemeStyle);
     await file
       .write(data)
-      .then(() => {
-        console.log("Created light theme");
-      })
+      .then(() => {})
       .catch((err) => {
         console.error("Error writing light theme", err);
       });
@@ -150,9 +153,7 @@ async function createThemeFolder() {
     const data = encoder.encode(darkThemeStyle);
     await file
       .write(data)
-      .then(() => {
-        console.log("Created dark theme");
-      })
+      .then(() => {})
       .catch((err) => {
         console.error("Error writing dark theme", err);
       });
@@ -166,9 +167,7 @@ async function createThemeFolder() {
     const data = encoder.encode(blueThemeStyle);
     await file
       .write(data)
-      .then(() => {
-        console.log("Created dark theme");
-      })
+      .then(() => {})
       .catch((err) => {
         console.error("Error writing dark theme", err);
       });
@@ -177,6 +176,7 @@ async function createThemeFolder() {
   await Promise.all([lightTheme, darkTheme, blueTheme]).then(() => {
     console.log("Created default themes");
     getThemes();
+    loadTheme("blue");
   });
 }
 export async function getThemes() {
@@ -184,7 +184,6 @@ export async function getThemes() {
     baseDir,
   })
     .then(async (themes) => {
-      console.log("Themes found", themes);
       const foundThemes = themes.filter((theme) => theme.name.endsWith(".css"));
       if (foundThemes.length === 0) {
         console.log("No themes found");
@@ -228,7 +227,7 @@ export async function loadTheme(themeName: string) {
     themeStyle.textContent = themeCss;
     toggleTheme(themeName);
   } catch (error) {
-    console.error("Failed to load theme:", error);
+    // console.error("Failed to load theme:", error);
     loadThemeTries++;
     if (loadThemeTries > 4) {
       loadThemeTries = 0;
@@ -236,7 +235,6 @@ export async function loadTheme(themeName: string) {
       return;
     }
     loadTheme(themeName);
-    console.log("Loaded Theme", themeName);
   }
 }
 export async function saveThemeLocal() {

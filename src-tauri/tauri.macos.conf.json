@@ -10,8 +10,6 @@
     "beforeBuildCommand": "npm run build"
   },
   "app": {
-    "macOSPrivateApi": true,
-
     "windows": [
       {
         "title": "yet-another-productivity-app",
