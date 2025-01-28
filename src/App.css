@@ -62,6 +62,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+input,
+.input,
+textarea {
+  background: var(--input-bg, var(--panel-bg, var(--background)));
+  color: var(--input-text, var(--color));
+  border: 1px solid var(--input-border, var(--color));
+}
+
 input:not(.exclude),
 .input,
 textarea:not(.exclude) {
@@ -70,12 +78,8 @@ textarea:not(.exclude) {
   appearance: none;
   resize: none;
   padding: 5px 10px;
-  background: var(--input-bg, var(--panel-bg, var(--background)));
-  color: var(--input-text, var(--color));
-  border: 1px solid var(--input-border, var(--color));
   border-radius: 5px;
   transition: all 200ms ease-in-out;
-  width: 100%;
 }
 
 input:focus,
@@ -584,4 +588,9 @@ input::-webkit-datetime-edit {
 
 .event-delete.deleting {
   background: red;
+}
+
+.event-editor {
+  background: var(--event-editor-bg, var(--background));
+  color: var(--event-editor-color, var(--color));
 }

@@ -22,7 +22,9 @@ function NoteSidebarItem(props: {
     >
       <h2
         className={
-          "note-side-title flex-1 pl-2" + " " + (props.note.unsaved ? "italic" : "")
+          "note-side-title flex-1 pl-2" +
+          " " +
+          (props.note.unsaved ? "italic" : "")
         }
         onClick={() => props.setOpenNote(props.note.id)}
       >

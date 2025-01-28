@@ -13,21 +13,33 @@ import {
 } from "lucide-react";
 import CustomCheckbox from "../ui/CustomCheckbox";
 import { DatePicker } from "../ui/DatePicker";
+import EventItem from "../Calendar/EventItem";
+import EventEditor from "../Calendar/EventEditor";
 
 //  Utils
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
 import { saveEvents } from "@/data/TasksAndEventsData";
-import EventItem from "../Calendar/EventItem";
+
+export type EditingEventType = {
+  time: number;
+  date: Date;
+};
 
 function Calendar() {
   const [showWeekends, setShowWeekends] = useState(false);
   const [time, setTime] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [visibleDays, setVisibleDays] = useState(3);
+
+  // Event editor
+  const [editingEvent, setEditingEvent] = useState<EditingEventType>();
+  const [currentlyEditing, setCurrentlyEditing] = useState<EventType>();
+  // Stores
   const { events, addEvent, deleteEvent, updateEvent } = useEventStore();
   const { clearEvents } = useSettingsStore().settings;
+
   const hours = Array.from({ length: 24 }, (_, i) => i);
 
   // Refresh every 12 hours
@@ -78,18 +90,34 @@ function Calendar() {
   };
 
   // Event store
-  const handleAddEvent = (time: number, date: Date) => {
+  const handleAddEvent = (
+    time: number,
+    date: Date,
+    name: string,
+    others?: Partial<EventType>,
+    edit?: boolean
+  ) => {
+    const newId = uuidv4();
     addEvent({
-      name: `Test at ${formatHour(time)} on ${format(
-        new Date().setDate(date.getDate()),
-        "EEE"
-      )}`,
-      id: uuidv4(),
+      name: name,
+      id: newId,
       start: {
-        date: date.getDate().toString() + date.getMonth() + date.getFullYear(),
+        date: format(date, "dd/MM/yyyy"),
         hour: time,
       },
+      ...others,
     });
+    if (edit) {
+      setCurrentlyEditing({
+        name: name,
+        id: newId,
+        start: {
+          date: format(date, "dd/MM/yyyy"),
+          hour: time,
+        },
+        ...others,
+      });
+    }
   };
   const handleDeleteEvent = (id: string) => {
     deleteEvent(id);
@@ -100,12 +128,7 @@ function Calendar() {
   //// Clear old events
   const clearCompletedEvents = () => {
     events.filter((eventItem) => {
-      if (
-        eventItem.start.date <
-        new Date().getDate().toString() +
-          new Date().getMonth() +
-          new Date().getFullYear()
-      ) {
+      if (eventItem.start.date < format(new Date(), "dd/MM/yyyy")) {
         deleteEvent(eventItem.id);
       }
     });
@@ -139,7 +162,7 @@ function Calendar() {
 
   const gridColsClass = {
     1: "grid grid-cols-[50px_repeat(1_1fr)]",
-    3: cn("grid grid-cols-[25px_repeat(3_1fr)]"),
+    3: cn("grid grid-cols-[25px_repeat(3_100px)]"),
     5: " grid grid-cols-[25px_repeat(5_1fr)]",
     7: " grid grid-cols-[25px_repeat(7_1fr)]",
   }[visibleDays];
@@ -253,16 +276,13 @@ function Calendar() {
                   const day = toDay(time, index);
                   const events = getEventsForDay(
                     hour,
-                    day.getDate().toString() +
-                      day.getMonth() +
-                      day.getFullYear()
+                    format(day, "dd/MM/yyyy")
                   );
-                  console.log(events);
                   return (
                     <div
                       key={index}
                       className={cn(
-                        "calendar-button border-y w-full overflow-y-scroll flex flex-col overflow-x-hidden",
+                        "calendar-button border-y w-full overflow-y-scroll flex flex-col overflow-x-hidden max-w-full",
                         "col-start-" + index + 1,
                         hour_index === array.length - 1 && "border-b-2",
                         isSelected && "date-selected"
@@ -275,12 +295,20 @@ function Calendar() {
                           event={eventItem}
                           deleteEvent={handleDeleteEvent}
                           updateEvent={handleUpdateEvent}
+                          setCurrentlyEditing={setCurrentlyEditing}
+                          setEditingEvent={setEditingEvent}
+                          hour={hour}
+                          date={toDay(time, index)}
                         />
                       ))}
                       <button
                         className="flex-1 place-items-center flex justify-center group"
                         onClick={() => {
-                          handleAddEvent(hour, toDay(time, index));
+                          setCurrentlyEditing(undefined);
+                          setEditingEvent({
+                            time: hour,
+                            date: toDay(time, index),
+                          });
                         }}
                       >
                         <Plus className="opacity-0 group-hover:opacity-100 duration-200" />
@@ -293,6 +321,16 @@ function Calendar() {
           })}
         </div>
       </div>
+      {editingEvent && (
+        <EventEditor
+          handleAddEvent={handleAddEvent}
+          handleUpdateEvent={handleUpdateEvent}
+          setEditingEvent={setEditingEvent}
+          editingEvent={editingEvent}
+          currentlyEditing={currentlyEditing}
+          setCurrentlyEditing={setCurrentlyEditing}
+        />
+      )}
     </div>
   );
 }

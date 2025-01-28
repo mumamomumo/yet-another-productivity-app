@@ -37,6 +37,8 @@ export async function readNoteFile(note: string) {
   const noteData = await readTextFile(
     await join(await localAppData, notesFolder, note)
   );
+  console.log(noteData);
+
   return noteData;
 }
 export async function createNote(title: string) {

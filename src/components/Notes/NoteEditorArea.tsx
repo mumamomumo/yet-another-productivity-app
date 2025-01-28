@@ -58,12 +58,14 @@ function NoteEditor(props: {
             }
           }}
           className={"note-editor-title max-w-[900px]"}
-          onBlur={(e) => handleRenameNote(props.openNote!.id, e.target.value)}
+          onBlur={() =>
+            handleRenameNote(props.openNote!.id, noteTitleRef.current!.value)
+          }
         />
         <textarea
           placeholder="Write your note here..."
           ref={noteContentRef}
-          className=" my-3 h-[100%] p-5 max-w-[900px]"
+          className=" my-3 h-full p-5 max-w-[900px]"
           onChange={(e) => updateNoteContent(e.target.value)}
         />
       </div>

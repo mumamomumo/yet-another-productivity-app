@@ -1,4 +1,3 @@
-import { savePageData, loadPageData } from "./PageData";
 import { loadThemeLocal, saveThemeLocal } from "./ThemeManager";
 import {
   saveTasks,
@@ -11,7 +10,6 @@ import { loadSettingsLocal, saveSettingsLocal } from "./SettingsData";
 import { loadChatHistory, saveChatHistory } from "./OllamaChat";
 
 export function SaveData() {
-  savePageData();
   saveThemeLocal();
   saveTasks();
   saveEvents();
@@ -21,7 +19,6 @@ export function SaveData() {
 }
 
 export function LoadData() {
-  loadPageData();
   loadThemeLocal();
   loadTasks();
   loadEvents();

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export type Task = {
-  id: any;
+  id: string;
   title: string;
   description?: string;
   priority: "low" | "medium" | "high";

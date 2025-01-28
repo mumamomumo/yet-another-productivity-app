@@ -57,11 +57,11 @@ function TitlebarMac() {
             >
               {maximized ? (
                 <div className="contents *:rotate-90">
-                  <Maximize2 height={15} />
+                  <Minimize2 height={15} />
                 </div>
               ) : (
                 <div className="contents *:rotate-90">
-                  <Minimize2 height={15} />
+                  <Maximize2 height={15} />
                 </div>
               )}
             </button>

@@ -2,7 +2,6 @@ import "./App.css";
 
 // Data
 import { LoadData } from "./data/DataManager";
-import { savePageData } from "./data/PageData";
 import { saveSettingsLocal } from "@/data/SettingsData";
 import { loadTheme, updateFont } from "./data/ThemeManager";
 
@@ -78,11 +77,6 @@ function App() {
     }
   }, [theme]);
 
-  // Save page on page change
-  useEffect(() => {
-    savePageData();
-  }, [page]);
-
   // Timer
   const handlePomodoroTimer = () => {
     useTimerStore.setState((state) => {
@@ -144,7 +138,11 @@ function App() {
           <Info setPage={usePageStore.getState().setPage} />
         ) : page === "calendar" && process.env.NODE_ENV === "development" ? (
           <Calendar />
-        ) : null}
+        ) : (
+          <div className="page place-content-center">
+            <h1 className="text-9xl">Working on it</h1>
+          </div>
+        )}
       </main>
     </div>
   );

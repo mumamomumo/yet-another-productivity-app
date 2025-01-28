@@ -41,7 +41,13 @@ function NotesSidebar(props: {
     deleteNote(note.id);
   };
   const handleCreateNote = async () => {
-    const newNote = { id: uuidv4(), title: "New Note", content: "" };
+    const newNote = {
+      id: uuidv4(),
+      title:
+        "New Note " +
+        notes.filter((note) => note.title.match("New Note d*")).length,
+      content: "",
+    };
     addNote(newNote);
     await createNote(newNote.title);
     props.setOpenNote(newNote.id);
