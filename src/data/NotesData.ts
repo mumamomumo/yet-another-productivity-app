@@ -15,6 +15,7 @@ const notesFolder = "notes";
 
 export async function readNotesDir(): Promise<DirEntry[] | null> {
   try {
+    console.log("Reading ntotes");
     const notesDirFiles = await readDir(
       await join(await localAppData, notesFolder)
     );
@@ -24,10 +25,12 @@ export async function readNotesDir(): Promise<DirEntry[] | null> {
     return notes;
   } catch (e) {
     try {
-      mkdir(await localAppData).then(async () => {
-        mkdir(await join(await localAppData, notesFolder));
-      });
+      console.log("Creating app data folder");
+      await mkdir(await localAppData);
     } catch {
+      console.log("making notes folder");
+      mkdir(await join(await localAppData, notesFolder));
+    } finally {
       mkdir(await join(await localAppData, notesFolder));
     }
     return readNotesDir();

@@ -40,7 +40,7 @@ function AddTaskComponent(props: {
       setEditingTask(undefined);
     } else {
       const newTask: Task = {
-        id: Date.now(),
+        id: Date.now().toString(),
         title: titleRef.current!.value,
         description: descriptionRef.current!.value,
         priority: priority,

@@ -136,13 +136,9 @@ function App() {
           <Tasks {...pageProps} />
         ) : page === "info" ? (
           <Info setPage={usePageStore.getState().setPage} />
-        ) : page === "calendar" && process.env.NODE_ENV === "development" ? (
+        ) : page === "calendar" ? (
           <Calendar />
-        ) : (
-          <div className="page place-content-center">
-            <h1 className="text-9xl">Working on it</h1>
-          </div>
-        )}
+        ) : null}
       </main>
     </div>
   );
