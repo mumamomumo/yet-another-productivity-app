@@ -114,7 +114,7 @@ function App() {
   // Settings
   useEffect(() => {
     saveSettingsLocal();
-    updateTheme(settings.font, settings.backgroundColor);
+    updateTheme(settings.font);
   }, [settings]);
 
   return (

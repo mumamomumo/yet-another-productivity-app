@@ -269,32 +269,8 @@ export function loadThemeLocal() {
     getThemes();
   }
 }
-function hexToRgb(hex: string) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
 
-export function updateTheme(font: string, bg: string) {
-  const bgrgb = hexToRgb(bg);
-  const averageColor = (bgrgb?.r! + bgrgb?.b! + bgrgb?.g!) / 3;
-  let color;
-  let panel;
-  let button;
-  if (averageColor > 140) {
-    color = "black";
-    panel = "#0001";
-    button = "#0001";
-  } else {
-    color = "white";
-    panel = "#eee1";
-    button = "#bbb5";
-  }
+export function updateTheme(font: string) {
   let themeStyle = document.getElementById("extra") as HTMLStyleElement;
-  themeStyle.textContent = `*{font-family:${font};} :root{--background: ${bg}; --color:${color}; --panel-bg: ${panel}; --button-hover: ${button};}`;
+  themeStyle.textContent = `*{font-family:${font};}`;
 }
