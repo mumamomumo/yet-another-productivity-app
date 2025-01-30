@@ -4,6 +4,7 @@ export type GeneralSettings = {
   topClock: boolean;
   showDate: boolean;
   enableAI: boolean;
+  backgroundColor: string;
   font: string;
   clearEvents: boolean;
 };
@@ -12,12 +13,13 @@ export const defaultSettings: GeneralSettings = {
   topClock: true,
   showDate: true,
   enableAI: true,
+  backgroundColor: "#3f3f3f",
   font: "Arial",
   clearEvents: true,
 };
 
 type SettingsStore = {
-  settings: Partial<GeneralSettings>;
+  settings: GeneralSettings;
   setSettings: (settings: Partial<GeneralSettings>) => void;
   resetSettings: () => void;
 };

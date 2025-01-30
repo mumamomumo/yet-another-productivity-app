@@ -14,6 +14,7 @@ function Settings(props: { setSettingsOpen: Function }) {
   const { settings, setSettings } = useSettingsStore();
 
   const fontRef = useRef<HTMLInputElement>(null);
+  const bgRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFolder = async () => {
     open({
@@ -30,6 +31,11 @@ function Settings(props: { setSettingsOpen: Function }) {
     if (fontRef.current) {
       console.log("Font submit");
       setSettings({ ...settings, font: fontRef.current.value });
+    }
+  };
+  const handleBgSubmit = () => {
+    if (bgRef.current) {
+      setSettings({ ...settings, backgroundColor: bgRef.current.value });
     }
   };
   useEffect(() => {
@@ -91,6 +97,15 @@ function Settings(props: { setSettingsOpen: Function }) {
               className="px-2 w-full min-w-min"
             />
           </div>
+        </div>
+        <div className="settings-item">
+          <h2>Background color</h2>
+          <input
+            type="color"
+            className="exclude cursor-pointer"
+            ref={bgRef}
+            onChange={handleBgSubmit}
+          />
         </div>
         <hr />
         {/* Clock */}

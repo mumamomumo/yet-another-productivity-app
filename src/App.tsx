@@ -3,7 +3,7 @@ import "./App.css";
 // Data
 import { LoadData } from "./data/DataManager";
 import { saveSettingsLocal } from "@/data/SettingsData";
-import { loadTheme, updateFont } from "./data/ThemeManager";
+import { loadTheme, updateTheme } from "./data/ThemeManager";
 
 // Stores & Hooks
 import { setPage, usePageStore } from "./store/PageStore";
@@ -114,7 +114,7 @@ function App() {
   // Settings
   useEffect(() => {
     saveSettingsLocal();
-    updateFont(settings.font!);
+    updateTheme(settings.font, settings.backgroundColor);
   }, [settings]);
 
   return (

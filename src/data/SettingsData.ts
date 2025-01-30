@@ -19,8 +19,9 @@ export function loadSettingsLocal() {
   try {
     const settings = localStorage.getItem("settings");
     if (settings) {
+      const savedSettings = JSON.parse(settings) as GeneralSettings;
       useSettingsStore.setState({
-        settings: JSON.parse(settings) as GeneralSettings,
+        settings: { ...defaultSettings, ...savedSettings },
       });
     } else {
       throw new Error("no settings found");

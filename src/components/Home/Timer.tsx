@@ -4,11 +4,24 @@ import EditTimerButton from "../ui/EditTimerButton";
 import { useTimerStore } from "@/store/TimerStore";
 
 function formatTime(time: number) {
-  const minutes = Math.floor(time / 60);
+  const hours = Math.floor(time / 60 / 60);
+  const minutes = Math.floor(time / 60 - hours * 60);
   const seconds = time % 60;
-  return `${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
+  if (hours === 0)
+    return `${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+  else
+    return `${hours.toString()}:${minutes.toString().padStart(2, "0")}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
+}
+
+function formatTotalTime(time: number) {
+  const hours = Math.floor(time / 60 / 60);
+  const minutes = Math.floor(time / 60 - hours * 60);
+  if (hours === 0) return `${minutes.toString().padStart(2, "0")}m`;
+  else return `${hours.toString()}h ${minutes.toString().padStart(2, "0")}m`;
 }
 
 const breakTimeId = "breakTime";
@@ -35,6 +48,7 @@ function Timer() {
     setOnBreak,
   } = useTimerStore();
   const [showWarning, setShowWarning] = useState(false);
+  const [totalTime, setTotalTime] = useState(0);
   // Update timer on time change
   useEffect(() => {
     if (paused) {
@@ -53,6 +67,13 @@ function Timer() {
     }
   }, [pomodori]);
 
+  useEffect(() => {
+    const timeWorking = workTime * 60;
+    const timeBreak = breakTime * 60;
+    const totalTime = timeWorking * pomodori + timeBreak * pomodori;
+    setTotalTime(totalTime);
+  }, [pomodori, workTime, breakTime]);
+
   // Reset button function
   const resetTime = () => {
     setPaused(true);
@@ -65,26 +86,6 @@ function Timer() {
     <div
       className={"timer-component w-full" + " " + (onBreak ? "on-break" : "")}
     >
-      <div className="flex justify-between px-5">
-        {/* Set focus */}
-        {/* {props.focusTimer ? (
-          <>
-            <Checkbox />
-            <SquareArrowOutDownLeft
-              className="cursor-pointer"
-              onClick={() => props.setFocus(false)}
-            />
-          </>
-        ) : (
-          <>
-            <div />
-            <SquareArrowOutUpRight
-              className="cursor-pointer"
-              onClick={() => props.setFocus(true)}
-            />
-          </>
-        )} */}
-      </div>
       <div className="timer text-center py-2 w-full">
         <p className="timer-text-break">{onBreak ? "Break" : "Session"}</p>
         <p className="timer-text-time w-full">{formatTime(timer)}</p>
@@ -99,6 +100,7 @@ function Timer() {
             Sessions greater than 90 minutes are not recommended
           </p>
         ) : null}
+        {paused && <p>Total time: {formatTotalTime(totalTime)}</p>}
       </div>
       <div className="timer-controls w-full flex justify-around">
         <button
