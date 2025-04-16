@@ -114,11 +114,7 @@ function App() {
   // Settings
   useEffect(() => {
     saveSettingsLocal();
-<<<<<<< HEAD
     updateFont(settings.font);
-=======
-    updateTheme(settings.font);
->>>>>>> refs/remotes/origin/main
   }, [settings]);
 
   return (
