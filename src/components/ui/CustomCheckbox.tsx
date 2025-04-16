@@ -24,7 +24,7 @@ function CustomCheckbox(props: {
           (isChecked ? "checked" : "")
         }
       >
-        {isChecked && <Check />}
+        {isChecked && <Check style={{ color: "var(--color)" }} />}
       </div>
     </div>
   );

@@ -280,17 +280,8 @@ export function loadThemeLocal() {
     getThemes();
   }
 }
-function hexToRgb(hex: string) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
 
+<<<<<<< HEAD
 export function updateTheme(bg: string) {
   const bgrgb = hexToRgb(bg);
   const averageColor = (bgrgb?.r! + bgrgb?.b! + bgrgb?.g!) / 3;
@@ -313,4 +304,9 @@ export function updateTheme(bg: string) {
 export function updateFont(font: string) {
   const fontElement = document.getElementById("font") as HTMLStyleElement;
   fontElement.textContent = `*{font-family:${font};}`;
+=======
+export function updateTheme(font: string) {
+  let themeStyle = document.getElementById("extra") as HTMLStyleElement;
+  themeStyle.textContent = `*{font-family:${font};}`;
+>>>>>>> refs/remotes/origin/main
 }

@@ -14,7 +14,6 @@ function Settings(props: { setSettingsOpen: Function }) {
   const { settings, setSettings } = useSettingsStore();
 
   const fontRef = useRef<HTMLInputElement>(null);
-  const bgRef = useRef<HTMLInputElement>(null);
 
   const handleOpenFolder = async () => {
     open({
@@ -33,12 +32,15 @@ function Settings(props: { setSettingsOpen: Function }) {
       setSettings({ ...settings, font: fontRef.current.value });
     }
   };
+<<<<<<< HEAD
   const handleBgSubmit = () => {
     if (bgRef.current) {
       setSettings({ ...settings, backgroundColor: bgRef.current.value });
       updateTheme(bgRef.current.value);
     }
   };
+=======
+>>>>>>> refs/remotes/origin/main
   useEffect(() => {
     if (fontRef.current) {
       fontRef.current.value = settings.font || "Arial";
@@ -98,15 +100,6 @@ function Settings(props: { setSettingsOpen: Function }) {
               className="px-2 w-full min-w-min"
             />
           </div>
-        </div>
-        <div className="settings-item">
-          <h2>Background color</h2>
-          <input
-            type="color"
-            className="exclude cursor-pointer"
-            ref={bgRef}
-            onChange={handleBgSubmit}
-          />
         </div>
         <hr />
         {/* Clock */}
