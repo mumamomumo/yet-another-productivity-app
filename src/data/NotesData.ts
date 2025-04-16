@@ -9,13 +9,10 @@ import {
   writeTextFile,
 } from "@tauri-apps/plugin-fs";
 import { join, appLocalDataDir } from "@tauri-apps/api/path";
-
 const localAppData = appLocalDataDir();
 const notesFolder = "notes";
-
 export async function readNotesDir(): Promise<DirEntry[] | null> {
   try {
-    console.log("Reading ntotes");
     const notesDirFiles = await readDir(
       await join(await localAppData, notesFolder)
     );
@@ -25,10 +22,8 @@ export async function readNotesDir(): Promise<DirEntry[] | null> {
     return notes;
   } catch (e) {
     try {
-      console.log("Creating app data folder");
       await mkdir(await localAppData);
     } catch {
-      console.log("making notes folder");
       mkdir(await join(await localAppData, notesFolder));
     } finally {
       mkdir(await join(await localAppData, notesFolder));
@@ -40,8 +35,6 @@ export async function readNoteFile(note: string) {
   const noteData = await readTextFile(
     await join(await localAppData, notesFolder, note)
   );
-  console.log(noteData);
-
   return noteData;
 }
 export async function createNote(title: string) {

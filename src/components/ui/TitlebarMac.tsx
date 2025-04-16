@@ -22,7 +22,7 @@ function TitlebarMac() {
   };
 
   const handleMaximize = () => {
-    appWindow.toggleMaximize();
+    appWindow.setFullscreen(true);
     setMaximized((prev) => !prev);
   };
 

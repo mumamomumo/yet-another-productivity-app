@@ -28,7 +28,7 @@ function Notes() {
         {/* Notes Sidebar */}
         <NotesSidebar setOpenNote={setOpenNote} />
       </ResizablePanel>
-      <ResizableHandle className="resize-handle w-2" />
+      <ResizableHandle className="resize-handle w-2" withHandle />
       <ResizablePanel
         className="right-notes panel flex justify-center"
         defaultSize={67}

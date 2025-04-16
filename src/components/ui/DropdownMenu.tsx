@@ -4,7 +4,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/Popover";
 function capitalizeFirstLetter(val: string) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
-
 function DropdownMenu(props: {
   values: Array<string>;
   setVar?: Function;
@@ -20,7 +19,6 @@ function DropdownMenu(props: {
       props.setVar(value);
     }
   }, [value, props.default]);
-
   return (
     <Popover key={props.values.toString()}>
       <PopoverTrigger

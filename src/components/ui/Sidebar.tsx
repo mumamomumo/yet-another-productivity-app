@@ -4,26 +4,22 @@ import HomeIcon from "./HomeIcon";
 
 const { setPage } = usePageStore.getState();
 const ICON_SIZE = 25;
-const menuItems: { name: PageName; icon: JSX.Element; tooltip: string }[] = [
+const menuItems: { name: PageName; icon: JSX.Element }[] = [
   {
     name: "home",
     icon: <HomeIcon width={ICON_SIZE} height={ICON_SIZE} />,
-    tooltip: "home",
   },
   {
     name: "tasks",
     icon: <PenLine />,
-    tooltip: "tasks",
   },
   {
     name: "notes",
     icon: <Notebook width={ICON_SIZE} height={ICON_SIZE} />,
-    tooltip: "notes",
   },
   {
     name: "calendar",
     icon: <Calendar width={ICON_SIZE} height={ICON_SIZE} />,
-    tooltip: "calendar",
   },
 ];
 function SidebarComponent(props: {

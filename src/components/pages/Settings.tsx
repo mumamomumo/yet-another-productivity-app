@@ -1,4 +1,4 @@
-import { getThemes, localAppDataDir } from "@/data/ThemeManager";
+import { getThemes, localAppDataDir, updateTheme } from "@/data/ThemeManager";
 import { useThemeStore } from "@/store/ThemeStore";
 import { open } from "@tauri-apps/plugin-dialog";
 import { useSettingsStore } from "@/store/GeneralSettings";
@@ -36,6 +36,7 @@ function Settings(props: { setSettingsOpen: Function }) {
   const handleBgSubmit = () => {
     if (bgRef.current) {
       setSettings({ ...settings, backgroundColor: bgRef.current.value });
+      updateTheme(bgRef.current.value);
     }
   };
   useEffect(() => {

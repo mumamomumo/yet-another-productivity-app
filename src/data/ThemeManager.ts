@@ -7,6 +7,7 @@ import {
 } from "@tauri-apps/plugin-fs";
 import { join, appLocalDataDir } from "@tauri-apps/api/path";
 import { useThemeStore } from "../store/ThemeStore";
+import { useSettingsStore } from "@/store/GeneralSettings";
 
 const { toggleTheme } = useThemeStore.getState();
 export const themeFolder = "themes";
@@ -222,12 +223,22 @@ export async function loadTheme(themeName: string) {
         baseDir,
       }
     );
-
+    const bgColor = themeCss.match(RegExp(/--background:([^;]+);/));
+    if (bgColor) {
+      useSettingsStore.setState((state) => {
+        return {
+          ...state,
+          settings: {
+            ...state.settings,
+            backgroundColor: bgColor[0].split(":")[1].replace(";", ""),
+          },
+        };
+      });
+    }
     // Inject the CSS content into the <style> tag
     themeStyle.textContent = themeCss;
     toggleTheme(themeName);
   } catch (error) {
-    // console.error("Failed to load theme:", error);
     loadThemeTries++;
     if (loadThemeTries > 4) {
       loadThemeTries = 0;
@@ -280,7 +291,7 @@ function hexToRgb(hex: string) {
     : null;
 }
 
-export function updateTheme(font: string, bg: string) {
+export function updateTheme(bg: string) {
   const bgrgb = hexToRgb(bg);
   const averageColor = (bgrgb?.r! + bgrgb?.b! + bgrgb?.g!) / 3;
   let color;
@@ -295,6 +306,11 @@ export function updateTheme(font: string, bg: string) {
     panel = "#eee1";
     button = "#bbb5";
   }
-  let themeStyle = document.getElementById("extra") as HTMLStyleElement;
-  themeStyle.textContent = `*{font-family:${font};} :root{--background: ${bg}; --color:${color}; --panel-bg: ${panel}; --button-hover: ${button};}`;
+  let themeStyle = document.getElementById(themeStyleId) as HTMLStyleElement;
+  themeStyle.textContent = `s:root{--background: ${bg}; --color:${color}; --panel-bg: ${panel}; --button-hover: ${button};}`;
+}
+
+export function updateFont(font: string) {
+  const fontElement = document.getElementById("font") as HTMLStyleElement;
+  fontElement.textContent = `*{font-family:${font};}`;
 }
