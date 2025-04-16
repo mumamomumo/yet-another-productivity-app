@@ -281,32 +281,7 @@ export function loadThemeLocal() {
   }
 }
 
-<<<<<<< HEAD
-export function updateTheme(bg: string) {
-  const bgrgb = hexToRgb(bg);
-  const averageColor = (bgrgb?.r! + bgrgb?.b! + bgrgb?.g!) / 3;
-  let color;
-  let panel;
-  let button;
-  if (averageColor > 140) {
-    color = "black";
-    panel = "#0001";
-    button = "#0001";
-  } else {
-    color = "white";
-    panel = "#eee1";
-    button = "#bbb5";
-  }
-  let themeStyle = document.getElementById(themeStyleId) as HTMLStyleElement;
-  themeStyle.textContent = `s:root{--background: ${bg}; --color:${color}; --panel-bg: ${panel}; --button-hover: ${button};}`;
-}
-
-export function updateFont(font: string) {
-  const fontElement = document.getElementById("font") as HTMLStyleElement;
-  fontElement.textContent = `*{font-family:${font};}`;
-=======
 export function updateTheme(font: string) {
   let themeStyle = document.getElementById("extra") as HTMLStyleElement;
   themeStyle.textContent = `*{font-family:${font};}`;
->>>>>>> refs/remotes/origin/main
 }
